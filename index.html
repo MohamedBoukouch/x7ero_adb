@@ -1,366 +1,403 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <!-- Favicon Links -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/Logo.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/Logo.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/Logo.webp">
+  <link rel="manifest" href="./favicon/site.webmanifest">
+  <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>X7ERO</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
     
-    <meta name='LTF_verify' content='ffa8b08c0a76f77848da31ecfaa5b9ca'/>
+    body {
+      background: #f8fafc;
+      min-height: 100vh;
+      color: #334155;
+      line-height: 1.5;
+    }
     
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Grow a Garden - Pro Generator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lilita+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@3.0.0-beta.6/dist/aos.css">
-	
-	<!-- Google tag (gtag.js) -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EPFW29NPW8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .navbar span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+    }
+    
+    .banner {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+    
+    .banner-overlay p {
+      font-size: 14px;
+      max-width: 500px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .form-container, .loading-container, .packages-container {
+      max-width: 500px;
+      margin: 24px auto;
+      padding: 24px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .form-title {
+      margin-bottom: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 2px rgba(16,185,129,0.1);
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .submit-btn:hover {
+      background: #059669;
+    }
+    
+    .loading-card {
+      text-align: center;
+    }
+    
+    .loading-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .loading-text {
+      font-size: 14px;
+      color: #64748b;
+    }
+    
+    .packages-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #1e293b;
+      text-align: center;
+    }
+    
+    .packages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .package {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
+      border: 1px solid #f1f5f9;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .package:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .package-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .package-left img {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .price {
+      color: #10b981;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .package-left p:last-child {
+      font-size: 12px;
+      color: #64748b;
+    }
+    
+    .amount {
+      font-weight: 600;
+      font-size: 15px;
+      text-align: right;
+      margin-bottom: 4px;
+    }
+    
+    .select-btn {
+      padding: 6px 12px;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .select-btn:hover {
+      background: #059669;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
+    /* CPA Locker Container */
+    #cpa-locker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      z-index: 1000;
+    }
 
-  gtag('config', 'G-EPFW29NPW8');
-</script>
+    /* Mobile Responsive Styles */
+    @media (max-width: 640px) {
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
 
+      .banner {
+        height: 150px;
+      }
 
-    <style>
-        :root {
-            --primary-color: #0d9488;
-            --primary-color-dark: #0f766e;
-            --secondary-color: #facc15;
-            --bg-light: #ffffff;
-            --text-dark: #111827;
-            --text-light: #6b7280;
-            --text-white: #ffffff;
-            --border-color: #e5e7eb;
-            --selected-color: var(--primary-color);
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            margin: 0; padding: 0; min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
-            position: relative; overflow-x: hidden; text-align: left;
-            background: linear-gradient(to bottom, #87CEFA, #f0f0f0);
-        }
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px 15px; position: relative; z-index: 2; }
-        .hero-section { text-align: center; padding: 40px 0; }
-        .logo-image { max-width: 350px; width: 100%; margin-bottom: 25px; }
-        .hero-subtitle { font-size: 1.3rem; color: var(--text-dark); margin-top: 10px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; font-weight: 500; }
-        .action-button {
-            background-color: var(--primary-color); color: var(--text-white);
-            border: none; border-radius: 12px; padding: 15px 35px;
-            font-size: 1.3rem; font-weight: 600; cursor: pointer;
-            transition: all 0.2s ease; box-shadow: 0 4px 14px 0 rgba(13, 148, 136, 0.39);
-            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .action-button:hover { transform: translateY(-2px); background-color: var(--primary-color-dark); box-shadow: 0 6px 20px 0 rgba(13, 148, 136, 0.45); }
-        .floating-btn { position: fixed; bottom: 20px; left: 50%; z-index: 99; transform: translate(-50%, 150%); opacity: 0; visibility: hidden; transition: all 0.4s ease-out; }
-        .floating-btn.visible { transform: translate(-50%, 0); opacity: 1; visibility: visible; }
-        .titles { font-size: 2.5rem; font-family: 'Lilita One', cursive; color: var(--text-dark); text-align: center; margin: 50px 0 30px 0; }
-        .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
-        .card {
-            background: var(--bg-light); border: 1px solid var(--border-color);
-            border-radius: 12px; padding: 15px; cursor: pointer; position: relative;
-            transition: all 0.2s ease-in-out; text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-        }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); }
-        .card.selected { outline: 3px solid var(--selected-color); box-shadow: 0 0 20px rgba(13, 148, 136, 0.6); transform: scale(1.03); }
-        .card .circle {
-            display: none; position: absolute; top: -5px; right: -5px; width: 28px; height: 28px;
-            background-color: var(--primary-color); border-radius: 50%; border: 2px solid var(--text-white);
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>');
-            background-size: 60%; background-repeat: no-repeat; background-position: center; z-index: 1;
-        }
-        .card.selected .circle { display: block; }
-        .card img { width: 100%; height: 90px; object-fit: contain; margin-bottom: 5px; }
-        .card-content h3 { margin: 10px 0 5px 0; font-size: 1rem; color: var(--text-dark); font-weight: 600; }
-        .warning { color: #d9534f; font-weight: 600; margin-top: 20px; text-align: center; font-size: 1.1rem; }
-        
-        #blank-screen { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            z-index: 1000; justify-content: center; align-items: center; padding: 15px;
-        }
-        .modal-box {
-            background-color: #ffffff; color: var(--text-dark); padding: 30px; border-radius: 20px;
-            text-align: center; width: 100%; max-width: 450px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); animation: pop-in 0.4s ease-out;
-        }
-        .modal-box h2 { font-size: 1.8rem; color: var(--text-dark); font-family: 'Lilita One', cursive; margin-bottom: 15px; }
-        .modal-box p { color: var(--text-light); font-size: 1rem; line-height: 1.5; margin-bottom: 25px; }
-        .modal-box input {
-            background-color: #f3f4f6; color: var(--text-dark); box-sizing: border-box;
-            display: block; margin: 0 auto 20px auto; width: 100%; padding: 15px;
-            font-size: 1.2rem; border-radius: 12px; border: 2px solid var(--border-color);
-            text-align: center; font-family: 'Poppins', sans-serif;
-        }
-        .modal-icon { width: 60px; height: 60px; margin: 0 auto 15px; }
-        
-        #item-log { margin-top: 20px; text-align: left; width: 100%; }
-        #item-log p {
-            background-color: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 10px;
-            display: flex; align-items: center; gap: 12px; animation: slideInUp 0.5s ease;
-            font-weight: 600; font-size: 1.1rem;
-        }
-        #item-log img { width: 45px; height: 45px; border-radius: 5px; object-fit: contain; }
-        
-        .summary-list { margin-top: 20px; text-align: left; max-height: 160px; overflow-y: auto; padding-right: 10px; border-top: 1px solid var(--border-color); padding-top: 15px; }
-        .summary-item { display: flex; align-items: center; background-color: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
-        .summary-item img { width: 45px; height: 45px; margin-right: 15px; border-radius: 5px; }
-        .summary-item span { font-family: 'Poppins', sans-serif; font-weight:600; font-size: 1rem; color: var(--text-dark); }
-        
-        /* --- Activity Feed (Fake Notifications) --- */
-        .activity-feed { position: fixed; top: 20px; right: 20px; z-index: 1001; display: flex; flex-direction: column; gap: 10px; }
-        .activity-toast {
-            background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px);
-            color: var(--text-dark); padding: 12px 18px; border-radius: 10px;
-            display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid var(--border-color);
-            font-size: 0.9rem; animation: slideInUp 0.5s ease-out forwards;
-        }
+      .form-container, 
+      .loading-container, 
+      .packages-container {
+        margin: 16px 12px;
+        padding: 20px;
+      }
 
-        .animated-verify-button { animation: pulse 1.5s infinite; }
-        .icon-success-checkmark { stroke: var(--primary-color); stroke-width: 3; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw-checkmark 1s ease-out forwards .5s; }
-        .confetti-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; pointer-events: none; }
-        .confetti { position: absolute; width: 10px; height: 10px; background-color: var(--primary-color); opacity: 0; animation: confetti-fall 5s ease-out infinite; }
-        .confetti:nth-child(5n) { background-color: var(--secondary-color); }
+      .package {
+        padding: 14px;
+      }
 
-        @keyframes pop-in { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes draw-checkmark { to { stroke-dashoffset: 0; } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        @keyframes confetti-fall { 0% { transform: translateY(-100px) rotateZ(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; } }
+      .navbar {
+        padding: 10px 12px;
+      }
+    }
+  </style>
 
-    </style>
+  <!-- Adbeu Media CPA Locker Script -->
+    <script type="text/javascript">
+        var ncPTA_wPv_ELsGcc={"it":4530265,"key":"55fbb"};
+    </script>
+    <script src="https://d167xx758yszc9.cloudfront.net/a19b2cb.js"></script>
 </head>
 <body>
-
-    <div class="activity-feed" id="activity-feed"></div>
-
-    <div class="container">
-        <header class="hero-section">
-           <img src="https://dorobux.xyz/Pfb42HzD/Untitled-design-27.png" alt="Grow a Garden Logo" class="logo-image" data-aos="zoom-in">
-           <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Get your favorite and rarest fruits & pets instantly. Safe, secure, and ready for you.</p>
-           <button class="action-button" onclick="document.getElementById('selection-section').scrollIntoView({ behavior: 'smooth' });" data-aos="fade-up" data-aos-delay="300">
-               <i class="fas fa-star"></i> <span>Start Now</span>
-           </button>
-        </header>
-
-    <main id="selection-section">
-            <h2 class="titles" data-aos="fade-up">1. Select Your Items</h2>
-            <div id="warning-pet-limit" class="warning"></div>
-            <h2 class="titles" style="font-size: 2rem; margin-top: 0;">Pets</h2>
-            <div class="card-container">
-                <div class="card" data-name="Disco Bee"><div class="circle"></div><img src="https://dorobux.xyz/pets/disco.webp" alt="Disco Bee"><div class="card-content"><h3>Disco Bee</h3></div></div>
-                <div class="card" data-name="Racoon Pet"><div class="circle"></div><img src="https://dorobux.xyz/pets/Racoon.webp" alt="Racoon Pet"><div class="card-content"><h3>Racoon Pet</h3></div></div>
-                <div class="card" data-name="Mimic Octopus"><div class="circle"></div><img src="https://dorobux.xyz/pets/mimic.webp" alt="Mimic Octopus"><div class="card-content"><h3>Mimic Octopus</h3></div></div>
-                <div class="card" data-name="Fennec Fox"><div class="circle"></div><img src="https://dorobux.xyz/pets/Fennec.webp" alt="Fennec Fox"><div class="card-content"><h3>Fennec Fox</h3></div></div>
-                <div class="card" data-name="Butterfly Pet"><div class="circle"></div><img src="https://dorobux.xyz/pets/butterfly.webp" alt="Butterfly Pet"><div class="card-content"><h3>Butterfly Pet</h3></div></div>
-                <div class="card" data-name="Dragonfly Pet"><div class="circle"></div><img src="https://dorobux.xyz/pets/dragonfly.webp" alt="Dragonfly Pet"><div class="card-content"><h3>Dragonfly Pet</h3></div></div>
-                <div class="card" data-name="Zombie Chicken"><div class="circle"></div><img src="https://dorobux.xyz/pets/zombie.webp" alt="Zombie Chicken"><div class="card-content"><h3>Zombie Chicken</h3></div></div>
-                <div class="card" data-name="Queen Bee"><div class="circle"></div><img src="https://dorobux.xyz/pets/queenbee.webp" alt="Queen Bee"><div class="card-content"><h3>Queen Bee</h3></div></div>
-                <div class="card" data-name="Red Fox"><div class="circle"></div><img src="https://dorobux.xyz/pets/redfox.webp" alt="Red Fox"><div class="card-content"><h3>Red Fox</h3></div></div>
-            </div>
-            <h2 class="titles" style="font-size: 2rem;">Fruits</h2>
-            <div class="card-container">
-                <div class="card" data-name="Giant Pinecone Seed"><div class="circle"></div><img src="https://dorobux.xyz/pets/candy.webp" alt="Giant Pinecone Seed"><div class="card-content"><h3>Giant Pinecone Seed</h3></div></div>
-                <div class="card" data-name="Burning Bud"><div class="circle"></div><img src="https://dorobux.xyz/fruit/Travelers.webp" alt="Burning Bud"><div class="card-content"><h3>Burning Bud</h3></div></div>
-                <div class="card" data-name="Sugar Apple"><div class="circle"></div><img src="https://dorobux.xyz/pets/sugar.webp" alt="Sugar Apple"><div class="card-content"><h3>Sugar Apple</h3></div></div>
-                <div class="card" data-name="Elephant Ears"><div class="circle"></div><img src="https://dorobux.xyz/pets/elephant.webp" alt="Elephant Ears"><div class="card-content"><h3>Elephant Ears</h3></div></div>
-                <div class="card" data-name="Feijoa"><div class="circle"></div><img src="https://dorobux.xyz/pets/feijoa.webp" alt="Feijoa"><div class="card-content"><h3>Feijoa</h3></div></div>
-                <div class="card" data-name="Loquat"><div class="circle"></div><img src="https://dorobux.xyz/pets/loquat.webp" alt="Loquat"><div class="card-content"><h3>Loquat</h3></div></div>
-                <div class="card" data-name="Prickly Pear"><div class="circle"></div><img src="https://dorobux.xyz/pets/prickly.webp" alt="Prickly Pear"><div class="card-content"><h3>Prickly Pear</h3></div></div>
-                <div class="card" data-name="Bell Pepper"><div class="circle"></div><img src="https://dorobux.xyz/pets/bell.webp" alt="Bell Pepper"><div class="card-content"><h3>Bell Pepper</h3></div></div>
-                <div class="card" data-name="Ember Lily"><div class="circle"></div><img src="https://dorobux.xyz/pets/ember.webp" alt="Ember Lily"><div class="card-content"><h3>Ember Lily</h3></div></div>
-                <div class="card" data-name="Beanstalk"><div class="circle"></div><img src="https://dorobux.xyz/pets/beanstalk.png" alt="Beanstalk"><div class="card-content"><h3>Beanstalk</h3></div></div>
-                <div class="card" data-name="Cacao"><div class="circle"></div><img src="https://dorobux.xyz/pets/cacao.webp" alt="Cacao"><div class="card-content"><h3>Cacao</h3></div></div>
-                <div class="card" data-name="Pepper"><div class="circle"></div><img src="https://dorobux.xyz/pets/pepper.webp" alt="Pepper"><div class="card-content"><h3>Pepper</h3></div></div>
-                <div class="card" data-name="Mushroom"><div class="circle"></div><img src="https://dorobux.xyz/pets/mushroom.webp" alt="Mushroom"><div class="card-content"><h3>Mushroom</h3></div></div>
-                <div class="card" data-name="Grape"><div class="circle"></div><img src="https://dorobux.xyz/pets/grape.webp" alt="Grape"><div class="card-content"><h3>Grape</h3></div></div>
-            </div>
-        </main>
-        <footer style="text-align:center; color: var(--text-dark); padding: 40px 0; font-size: 0.9rem; font-weight: 500;">
-            ©️ 2025 Grow A Garden. All Rights Reserved.
-        </footer>
+  <div class="navbar">
+    <div>☰</div>
+    <div>
+      <span style="display:none">Discover</span>
+      <span style="display:none">Marketplace</span>
+      <span>Roblox</span>
     </div>
+  </div>
 
-    <button id="continue-btn" class="action-button floating-btn">Continue →</button>
-    
-    <div id="blank-screen">
-        <div id="modal-content-area" class="modal-box">
-             </div>
+  <div class="banner">
+    <img src="./images/roblox.webp" alt="Roblox Banner">
+    <div class="banner-overlay">
+      <p>Roblox allows you to purchase upgrades for your avatar or buy special abilities in experiences.</p>
     </div>
+  </div>
 
-    <script src="https://unpkg.com/aos@3.0.0-beta.6/dist/aos.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({ once: true, duration: 800, offset: 50 });
-            
-            const cards = document.querySelectorAll('.card');
-            const continueBtn = document.getElementById('continue-btn');
-            const warningPetLimit = document.getElementById('warning-pet-limit');
-            const blankScreen = document.getElementById('blank-screen');
-            const modalContentArea = document.getElementById('modal-content-area');
-            const activityFeedEl = document.getElementById('activity-feed');
-            
-            const selectedCards = new Set();
-            const MAX_SELECTION = 3;
-            const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-            
-            function showUsernameModal() {
-                modalContentArea.innerHTML = `
-                    <h2>Enter Your Username</h2>
-                    <p>Please enter your username to begin the generation process.</p>
-                    <input type="text" id="modal-username" placeholder="Your Username Here">
-                    <div id="modal-warning" class="warning" style="min-height: 25px;"></div>
-                    <button id="modal-generate-btn" class="action-button">Start Generation</button>
-                `;
-                blankScreen.style.display = 'flex';
-                
-                document.getElementById('modal-generate-btn').addEventListener('click', () => {
-                    const usernameInput = document.getElementById('modal-username');
-                    const username = usernameInput.value.trim();
-                    if (username) {
-                        startGenerationSequence(username);
-                    } else {
-                        document.getElementById('modal-warning').textContent = 'Username cannot be empty!';
-                    }
-                });
-            }
+  <form id="usernameForm" class="form-container">
+    <h2 class="form-title">Roblox Username</h2>
+    <input type="text" id="usernameInput" placeholder="Enter username" class="form-input" required>
+    <button type="submit" class="submit-btn">Continue</button>
+  </form>
 
-            async function startGenerationSequence(username) {
-                modalContentArea.innerHTML = `
-                    <h2><i class="fas fa-spinner fa-spin"></i> Connecting...</h2>
-                    <p>Please wait while we connect and verify <b>${username}</b>.</p>
-                `;
-                await sleep(2500);
+  <div id="loading" class="loading-container" style="display:none">
+    <div class="loading-card">
+      <img src="./images/money_icon.png" alt="Loading" class="loading-icon">
+      <p id="loadingText">Loading packages...</p>
+    </div>
+  </div>
 
-                modalContentArea.innerHTML = `
-                    <h2><i class="fas fa-box-open"></i> Generating Your Items</h2>
-                    <div id="item-log"></div>
-                `;
-                const itemLog = document.getElementById('item-log');
-                for (const card of Array.from(selectedCards)) {
-                    await sleep(1500);
-                    itemLog.innerHTML += `
-                        <p>
-                            <img src="${card.querySelector('img').src}" alt="${card.dataset.name}">
-                            <span>${card.dataset.name}</span>
-                            <i class="fas fa-check-circle" style="color:var(--primary-color); margin-left: auto;"></i>
-                        </p>`;
-                }
+  <div id="packages" class="packages-container" style="display:none">
+    <h2 class="packages-title">Select Roblox Package</h2>
+    <div id="packageList" class="packages-grid"></div>
+  </div>
 
-                await sleep(2000);
-                showSuccessModal();
-            }
+  <!-- CPA Locker Container -->
+  <div id="cpa-locker" style="display: none;"></div>
 
-            function showSuccessModal() {
-                let summaryItemsHtml = '';
-                Array.from(selectedCards).forEach(card => {
-                    summaryItemsHtml += `<div class="summary-item">
-                        <img src="${card.querySelector('img').src}" alt="${card.dataset.name}">
-                        <span>${card.dataset.name}</span>
-                    </div>`;
-                });
+  <script>
+    (function () {
+      const usernameForm = document.getElementById('usernameForm');
+      const usernameInput = document.getElementById('usernameInput');
+      const loadingDiv = document.getElementById('loading');
+      const loadingText = document.getElementById('loadingText');
+      const packagesDiv = document.getElementById('packages');
+      const packageList = document.getElementById('packageList');
+      const cpaLocker = document.getElementById('cpa-locker');
 
-                modalContentArea.innerHTML = `
-                    <div class="confetti-container"></div>
-                    <div class="modal-icon">
-                        <svg class="icon-success-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                            <circle cx="26" cy="26" r="25" fill="none" style="stroke: #e5e7eb;"/>
-                            <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                        </svg>
-                    </div>
-                    <h2>Success!</h2>
-                    <p>Your items have been generated and are ready!</p>
-                    <div class="summary-list">${summaryItemsHtml}</div>
-                `;
-                
-                const confettiContainer = modalContentArea.querySelector('.confetti-container');
-                for (let i = 0; i < 100; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + '%';
-                    confetti.style.animationDelay = Math.random() * 5 + 's';
-                    confettiContainer.appendChild(confetti);
-                }
+      const RobloxPackages = [
+        { price: "$0.00", amount: "1,000", id: 1 },
+        { price: "$1.00", amount: "5,000", id: 2 },
+        { price: "$3.00", amount: "10,000", id: 3 },
+        { price: "$5.00", amount: "25,000", id: 4 }
+      ];
 
-                setTimeout(showVerificationModal, 2000);
-            }
-            
-            function showVerificationModal() {
-                modalContentArea.innerHTML = `
-                    <div class="modal-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                    </div>
-                    <h2>Human Verification</h2>
-                    <p>To prevent bot abuse, please complete the final step to receive your items.</p>
-                    <button id="verify-button" class="action-button animated-verify-button">Verify Now</button>
-                `;
-                document.getElementById('verify-button').addEventListener('click', () => { 
-                    // This function _du() is likely defined in the external script below and leads to the offer wall.
-                    _du(); 
-                });
-            }
-            
-            continueBtn.addEventListener('click', showUsernameModal);
+      // Step 1: Handle form submit
+      usernameForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const username = usernameInput.value.trim();
+        if (!username) return;
 
-            cards.forEach(card => {
-                card.addEventListener('click', () => {
-                    warningPetLimit.textContent = '';
-                    if (selectedCards.has(card)) {
-                        card.classList.remove('selected');
-                        selectedCards.delete(card);
-                    } else {
-                        if (selectedCards.size < MAX_SELECTION) {
-                            card.classList.add('selected');
-                            selectedCards.add(card);
-                        } else {
-                            warningPetLimit.textContent = `You can only select up to ${MAX_SELECTION} items!`;
-                        }
-                    }
-                    continueBtn.classList.toggle('visible', selectedCards.size > 0);
-                });
-            });
+        usernameForm.style.display = 'none';
+        loadingText.textContent = `Loading packages for ${username}...`;
+        loadingDiv.style.display = 'block';
 
-            // Activity Feed Logic (Fake Notifications)
-            const fakeUsers = ['User_1337', 'GardenPro', 'PetMaster', 'FruitFan', 'Grower_99'];
-            const fakeItems = ['Disco Bee', 'Racoon Pet', 'Candy Blossom', 'Beanstalk'];
-            setInterval(() => {
-                const user = fakeUsers[Math.floor(Math.random() * fakeUsers.length)];
-                const item = fakeItems[Math.floor(Math.random() * fakeItems.length)];
-                const toast = document.createElement('div');
-                toast.className = 'activity-toast';
-                toast.innerHTML = `<div>🎉</div> <div><b>${user}</b> just received <b>${item}</b>!</div>`;
-                if (activityFeedEl) {
-                    activityFeedEl.prepend(toast);
-                    if (activityFeedEl.children.length > 3) { 
-                        activityFeedEl.lastChild.remove(); 
-                    }
-                    setTimeout(() => { 
-                        if (toast) toast.remove();
-                    }, 5000);
-                }
-            }, 7000);
+        setTimeout(() => {
+          loadingDiv.style.display = 'none';
+          showPackages();
+        }, 2000);
+      });
+
+      // Step 2: Show package options
+      function showPackages() {
+        packagesDiv.style.display = 'block';
+        packageList.innerHTML = '';
+
+        RobloxPackages.forEach(pkg => {
+          const pkgDiv = document.createElement('div');
+          pkgDiv.className = 'package';
+          pkgDiv.innerHTML = `
+            <div class="package-left">
+              <img src="./images/money_icon.png" alt="Money">
+              <div>
+                <p class="price">${pkg.price}</p>
+                <p>Roblox Amount</p>
+              </div>
+            </div>
+            <div>
+              <p class="amount">${pkg.amount}</p>
+              <button class="select-btn" data-id="${pkg.id}">Select</button>
+            </div>
+          `;
+          packageList.appendChild(pkgDiv);
         });
-    </script>
-    
-   <script type="text/javascript">
-    var JlWJE_oOl_gSLkpc={"it":4530265,"key":"55fbb"};
-</script>
-<script src="https://dfmpe7igjx4jo.cloudfront.net/1e96845.js"></script>
 
+        // Step 3: When package is selected
+        document.querySelectorAll('.select-btn').forEach(btn => {
+          btn.addEventListener('click', function () {
+            packagesDiv.style.display = 'none';
+            showCpaLocker();
+          });
+        });
+      }
 
-<div hidden>
-  <a href="http://livetrafficfeed.com" data-num="1" data-width="210" data-responsive="0" data-time="America%2FNew_York" data-root="0" data-cheader="2853a8" data-theader="ffffff" data-border="2853a8" data-background="ffffff" data-normal="000000" data-link="135d9e" target="_blank" id="LTF_live_website_visitor">Stat Counter</a>
-  <script type="text/javascript" src="//cdn.livetrafficfeed.com/static/v4/live.js"></script>
-  <noscript><a href="http://livetrafficfeed.com">Stat Counter</a></noscript>
-</div>
+      // Step 4: Display CPA locker using _jb()
+      function showCpaLocker() {
+        cpaLocker.style.display = 'block';
+        if(typeof _jb === 'function') {
+          _jb();
+        } else {
+          // If not loaded, try again after a short delay
+          let attempts = 0;
+          const maxAttempts = 10;
+          const interval = setInterval(() => {
+            attempts++;
+            if(typeof _jb === 'function') {
+              clearInterval(interval);
+              _jb();
+            } else if(attempts >= maxAttempts) {
+              clearInterval(interval);
+              alert('CPA Locker failed to load. Please disable adblock or try again.');
+              cpaLocker.style.display = 'none';
+            }
+          }, 500);
+        }
+      }
+    })();
+  </script>
 
-
+  <!-- TikTok user warning -->
+  <script>
+    if (navigator.userAgent.includes("TikTok")) {
+      alert("⚠️ Pour une meilleure expérience, clique sur les 3 points en haut à droite puis sélectionne 'Ouvrir dans le navigateur' 📱");
+    }
+  </script>
 </body>
 </html>
