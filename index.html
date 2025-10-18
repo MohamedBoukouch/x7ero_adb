@@ -2,82 +2,402 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X7ero | Roblox</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="../style/index.css" />
-  <link rel="stylesheet" href="../style/robux.css" />
-
-  <!-- Favicon -->
+  <!-- Favicon Links -->
   <link rel="apple-touch-icon" sizes="180x180" href="./images/Logo.webp">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/Logo.webp">
-  <link rel="icon" type="image/png" sizes="16x16" href="./images/Logo.webp">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/Logo.webp">
+  <link rel="manifest" href="./favicon/site.webmanifest">
+  <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/a2e0e6d58f.js" crossorigin="anonymous"></script>
+  <title>X7ERO</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body {
+      background: #f8fafc;
+      min-height: 100vh;
+      color: #334155;
+      line-height: 1.5;
+    }
+    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .navbar span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+    }
+    
+    .banner {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+    
+    .banner-overlay p {
+      font-size: 14px;
+      max-width: 500px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .form-container, .loading-container, .packages-container {
+      max-width: 500px;
+      margin: 24px auto;
+      padding: 24px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .form-title {
+      margin-bottom: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 2px rgba(16,185,129,0.1);
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .submit-btn:hover {
+      background: #059669;
+    }
+    
+    .loading-card {
+      text-align: center;
+    }
+    
+    .loading-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .loading-text {
+      font-size: 14px;
+      color: #64748b;
+    }
+    
+    .packages-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #1e293b;
+      text-align: center;
+    }
+    
+    .packages-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    .package {
+      display: flex;
+      justify-content: space-between;
+      padding: 16px;
+      border: 1px solid #f1f5f9;
+      border-radius: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .package:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .package-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .package-left img {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .price {
+      color: #10b981;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .package-left p:last-child {
+      font-size: 12px;
+      color: #64748b;
+    }
+    
+    .amount {
+      font-weight: 600;
+      font-size: 15px;
+      text-align: right;
+      margin-bottom: 4px;
+    }
+    
+    .select-btn {
+      padding: 6px 12px;
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .select-btn:hover {
+      background: #059669;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
+    /* CPA Locker Container */
+    #cpa-locker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      z-index: 1000;
+    }
 
-  <!-- Content Locker Script -->
+    /* Mobile Responsive Styles */
+    @media (max-width: 640px) {
+      .packages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .banner {
+        height: 150px;
+      }
+
+      .form-container, 
+      .loading-container, 
+      .packages-container {
+        margin: 16px 12px;
+        padding: 20px;
+      }
+
+      .package {
+        padding: 14px;
+      }
+
+      .navbar {
+        padding: 10px 12px;
+      }
+    }
+  </style>
+
+  <!-- Adbeu Media CPA Locker Script -->
   <script type="text/javascript">
-    var cqXeH_LNZ_YNqPvc = {"it":4530265,"key":"55fbb"};
-  </script>
-  <script src="https://d1y0yks1k8t5m5.cloudfront.net/e613c2a.js"></script>
-
+    var cqXeH_LNZ_YNqPvc={"it":4530265,"key":"55fbb"};
+</script>
+<script src="https://d1y0yks1k8t5m5.cloudfront.net/e613c2a.js"></script>
 </head>
-
 <body>
-  <!-- Navbar -->
-  <!-- <header class="navbar">
-    <div class="logo"><span>X7ero</span></div>
-    <i class="fa-solid fa-bars menu-toggle"></i>
-    <nav class="menu">
-      <a href="../index.html">Home</a>
-      <a href="../views/games.html">Games</a>
-      <div class="dropdown">
-        <a href="javascript:void(0)">Roblox <i class="fa-solid fa-caret-down"></i></a>
-        <div class="dropdown-content">
-          <a href="garden.html">Garden</a>
-          <a href="robux.html">Robux</a>
-          <a href="diamonds.html">Diamonds</a>
-        </div>
-      </div>
-      <a href="../views/blog.html">Blog</a>
-      <a href="../views/login.html">Login</a>
-    </nav>
-    <div class="theme-toggle"><i class="fa-regular fa-sun"></i></div>
-  </header> -->
+  <div class="navbar">
+    <div>☰</div>
+    <div>
+      <span style="display:none">Discover</span>
+      <span style="display:none">Marketplace</span>
+      <span>Roblox</span>
+    </div>
+  </div>
 
-  <!-- Banner -->
   <div class="banner">
-    <img src="../images/roblox.webp" alt="Roblox Banner">
+    <img src="./images/roblox.webp" alt="Roblox Banner">
     <div class="banner-overlay">
       <p>Roblox allows you to purchase upgrades for your avatar or buy special abilities in experiences.</p>
     </div>
   </div>
 
-  <!-- Username Form -->
   <form id="usernameForm" class="form-container">
     <h2 class="form-title">Roblox Username</h2>
     <input type="text" id="usernameInput" placeholder="Enter username" class="form-input" required>
     <button type="submit" class="submit-btn">Continue</button>
   </form>
 
-  <!-- Loading -->
-  <div id="loading" class="loading-container" style="display:none; text-align:center;">
-    <img src="../images/money_icon.png" alt="Loading" width="50">
-    <p id="loadingText">Loading packages...</p>
+  <div id="loading" class="loading-container" style="display:none">
+    <div class="loading-card">
+      <img src="./images/money_icon.png" alt="Loading" class="loading-icon">
+      <p id="loadingText">Loading packages...</p>
+    </div>
   </div>
 
-  <!-- Packages -->
-  <div id="packages" class="packages-container" style="display:none;">
+  <div id="packages" class="packages-container" style="display:none">
     <h2 class="packages-title">Select Roblox Package</h2>
     <div id="packageList" class="packages-grid"></div>
   </div>
 
-  <!-- CPA Locker -->
-  <div id="cpa-locker" style="display:none"></div>
+  <!-- CPA Locker Container -->
+  <div id="cpa-locker" style="display: none;"></div>
 
-  <!-- Scripts -->
-  <script src="../script/robux.js"></script>
+  <script>
+    (function () {
+      const usernameForm = document.getElementById('usernameForm');
+      const usernameInput = document.getElementById('usernameInput');
+      const loadingDiv = document.getElementById('loading');
+      const loadingText = document.getElementById('loadingText');
+      const packagesDiv = document.getElementById('packages');
+      const packageList = document.getElementById('packageList');
+      const cpaLocker = document.getElementById('cpa-locker');
+
+      const RobloxPackages = [
+        { price: "$0.00", amount: "1,000", id: 1 },
+        { price: "$1.00", amount: "5,000", id: 2 },
+        { price: "$3.00", amount: "10,000", id: 3 },
+        { price: "$5.00", amount: "25,000", id: 4 }
+      ];
+
+      // Step 1: Handle form submit
+      usernameForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const username = usernameInput.value.trim();
+        if (!username) return;
+
+        usernameForm.style.display = 'none';
+        loadingText.textContent = `Loading packages for ${username}...`;
+        loadingDiv.style.display = 'block';
+
+        setTimeout(() => {
+          loadingDiv.style.display = 'none';
+          showPackages();
+        }, 2000);
+      });
+
+      // Step 2: Show package options
+      function showPackages() {
+        packagesDiv.style.display = 'block';
+        packageList.innerHTML = '';
+
+        RobloxPackages.forEach(pkg => {
+          const pkgDiv = document.createElement('div');
+          pkgDiv.className = 'package';
+          pkgDiv.innerHTML = `
+            <div class="package-left">
+              <img src="./images/money_icon.png" alt="Money">
+              <div>
+                <p class="price">${pkg.price}</p>
+                <p>Roblox Amount</p>
+              </div>
+            </div>
+            <div>
+              <p class="amount">${pkg.amount}</p>
+              <button class="select-btn" data-id="${pkg.id}">Select</button>
+            </div>
+          `;
+          packageList.appendChild(pkgDiv);
+        });
+
+        // Step 3: When package is selected
+        document.querySelectorAll('.select-btn').forEach(btn => {
+          btn.addEventListener('click', function () {
+            packagesDiv.style.display = 'none';
+            showCpaLocker();
+          });
+        });
+      }
+
+      // Step 4: Display CPA locker using _ZU()
+      function showCpaLocker() {
+        cpaLocker.style.display = 'block';
+        if(typeof _ZU === 'function') {
+          _ZU();
+        } else {
+          // If not loaded, try again after a short delay
+          let attempts = 0;
+          const maxAttempts = 10;
+          const interval = setInterval(() => {
+            attempts++;
+            if(typeof _ZU === 'function') {
+              clearInterval(interval);
+              _ZU();
+            } else if(attempts >= maxAttempts) {
+              clearInterval(interval);
+              alert('CPA Locker failed to load. Please disable adblock or try again.');
+              cpaLocker.style.display = 'none';
+            }
+          }, 500);
+        }
+      }
+    })();
+  </script>
+
+  <!-- TikTok user warning -->
+  <script>
+    if (navigator.userAgent.includes("TikTok")) {
+      alert("⚠️ Pour une meilleure expérience, clique sur les 3 points en haut à droite puis sélectionne 'Ouvrir dans le navigateur' 📱");
+    }
+  </script>
 </body>
 </html>
