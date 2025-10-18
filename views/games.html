@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X7ero | Games</title>
+  <link rel="stylesheet" href="../style/games.css" />
+  <link rel="stylesheet" href="../style/index.css" />
+  <script src="https://kit.fontawesome.com/a2e0e6d58f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo">
+      <span>X7ero</span>
+    </div>
+
+    <nav class="menu">
+      <a href="../index.html">Home</a>
+
+      <!-- Roblox Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Roblox <i class="fa-solid fa-angle-down"></i></button>
+        <div class="dropdown-content">
+          <a href="garden.html">Garden</a>
+          <a href="robux.html">Robux</a>
+          <!-- <a href="diamantes.html">Diamantes</a> -->
+        </div>
+      </div>
+
+      <a href="blog.html">Blog</a>
+      <!-- <a href="login.html">Login</a> -->
+    </nav>
+
+    <div class="theme-toggle">
+      <i class="fa-regular fa-sun"></i>
+    </div>
+  </header>
+
+  <!-- Games Section -->
+  <section class="page-content">
+    <h1><i class="fa-solid fa-gamepad"></i> All Games</h1>
+    <p>Explore our latest MOD games with unlimited fun!</p>
+
+    <div id="gamesGrid" class="games-grid"></div>
+  </section>
+
+  <!-- Script -->
+  <script>
+    // Roblox dropdown toggle for mobile
+    const dropbtn = document.querySelector(".dropbtn");
+    dropbtn.addEventListener("click", () => {
+      document.querySelector(".dropdown").classList.toggle("active");
+    });
+
+    async function loadGames() {
+      try {
+        const res = await fetch("../data/games.json");
+        const data = await res.json();
+        const gamesGrid = document.getElementById("gamesGrid");
+        gamesGrid.innerHTML = "";
+
+        data.forEach(item => {
+          const card = document.createElement("div");
+          card.classList.add("game-card");
+          card.innerHTML = `
+            <div class="game-image">
+              <img src="${item.image}" alt="${item.title}">
+              <span class="tag">MOD</span>
+            </div>
+            <div class="game-info">
+              <h3>${item.title}</h3>
+              <p class="small-text">Size: ${item.size}</p>
+              <p class="small-text">Version: ${item.version}</p>
+              <small>📅 ${item.date}</small>
+            </div>
+            <span class="status updated">UPDATED</span>
+          `;
+          gamesGrid.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error loading games:", err);
+      }
+    }
+
+    loadGames();
+  </script>
+</body>
+</html>

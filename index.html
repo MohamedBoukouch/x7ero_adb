@@ -1,566 +1,151 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grow a Garden - Free Items</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #111;
-      font-family: 'Segoe UI', sans-serif;
-      color: #a5d6a7;
-      text-align: center;
-    }
-
-    .game-header {
-      padding: 30px 20px 10px;
-      background: linear-gradient(to bottom, #1b3b1b, #111);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-    }
-
-    .game-title {
-      font-size: 2.8rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: #81c784;
-      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
-      margin: 0;
-    }
-
-    .game-logo {
-      width: 140px;
-      height: auto;
-      margin-top: 15px;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-    }
-
-    .sub-instruction {
-      margin: 25px auto 40px;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #a5d6a7;
-      text-shadow: 0 0 6px #3a7d3a;
-      position: relative;
-      display: inline-block;
-      padding-bottom: 6px;
-      max-width: max-content;
-    }
-
-    .sub-instruction::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(90deg, #4caf50, #81c784);
-      border-radius: 2px;
-    }
-
-    .items-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
-      padding: 0 20px 40px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .item-card {
-      background-color: #222;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      transition: transform 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #a5d6a7;
-    }
-
-    .item-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 1);
-    }
-
-    .item-card img {
-      width: 100%;
-      height: 140px;
-      object-fit: contain;
-      border-radius: 10px;
-      background-color: #333;
-    }
-
-    .item-name {
-      margin-top: 10px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #81c784;
-    }
-
-    .claim-btn {
-      margin-top: 12px;
-      padding: 8px 20px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .claim-btn:hover {
-      background-color: #388e3c;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: #1e3c1e;
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      max-width: 320px;
-      width: 90%;
-      color: #a5d6a7;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.9);
-    }
-
-    .modal-heading {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #c8e6c9;
-      margin-bottom: 10px;
-      text-shadow: 0 0 4px rgba(76, 175, 80, 0.6);
-    }
-
-    .modal-content img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
-      margin-bottom: 10px;
-    }
-
-    .modal-title {
-      margin-top: 10px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #81c784;
-    }
-
-    .input-field {
-      width: 85%;
-      max-width: 260px;
-      padding: 6px 12px;
-      margin: 15px auto 0;
-      border: 2px solid #4caf50;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      outline: none;
-      background-color: #2c5232;
-      color: #c8e6c9;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 2px 6px rgba(67, 160, 71, 0.3);
-      display: block;
-    }
-
-    .input-field::placeholder {
-      color: #a5d6a7;
-    }
-
-    .input-field:focus {
-      border-color: #81c784;
-      box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.5);
-      background-color: #356b38;
-    }
-
-    .final-claim-btn {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .final-claim-btn:hover {
-      background-color: #388e3c;
-    }
-
-    .close-btn {
-      margin-top: 10px;
-      background: none;
-      border: none;
-      color: #888;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    #progressPopup {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-    }
-
-    #progressPopup .progress-content {
-      background-color: #1e3c1e;
-      padding: 25px 30px;
-      border-radius: 15px;
-      width: 280px;
-      max-width: 90%;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.9);
-      font-family: 'Segoe UI', sans-serif;
-      color: #a5d6a7;
-      font-weight: 700;
-      font-size: 1.3rem;
-    }
-
-    #progressPercent {
-      margin-top: 15px;
-      font-size: 2.2rem;
-      color: #81c784;
-      font-weight: 900;
-    }
-
-    @media (max-width: 600px) {
-      .game-title {
-        font-size: 2rem;
-      }
-      .game-logo {
-        width: 100px;
-      }
-      .sub-instruction {
-        font-size: 1.1rem;
-      }
-      .items-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .modal-content img {
-        width: 100px;
-        height: 100px;
-      }
-      .input-field {
-        width: 90%;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
-
-  <!-- NEW Content Locker Scripts -->
-<script type="text/javascript">
-    var cqXeH_LNZ_YNqPvc={"it":4530265,"key":"55fbb"};
-</script>
-<script src="https://d1y0yks1k8t5m5.cloudfront.net/e613c2a.js"></script>
-
-
-<link rel="me" href="https://draft.blogger.com/profile/15940018718904929001" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
-<link rel="me" href="https://www.blogger.com/profile/12625433212202769684" />
-<meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
-<meta name='google-adsense-platform-domain' content='blogspot.com'/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X7ero | Home</title>
+  <link rel="stylesheet" href="style/index.css" />
+  <script src="https://kit.fontawesome.com/a2e0e6d58f.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="logo">
+      <span>X7ero</span>
+    </div>
 
-  <div class="game-header">
-    <h1 class="game-title">GROW A GARDEN</h1>
-    <img class="game-logo" src="https://i.postimg.cc/YCC0p84F/gr.webp" alt="Grow a Garden Logo" />
-  </div>
+    <nav class="menu">
+      <a href="views/games.html">Games</a>
 
-  <div class="sub-instruction">Select the item you want</div>
-  <div class="items-container">
-     <div class="item-card">
-      <img src="https://i.postimg.cc/tJxn3Fwg/TIGER-removebg-preview.png" alt="Tiger" />
-      <div class="item-name">Tiger</div>
-      <button class="claim-btn" onclick="openModal('Tiger', 'https://i.postimg.cc/tJxn3Fwg/TIGER-removebg-preview.png')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/6qDVs3LH/gw1.webp" alt="Kitsune" />
-      <div class="item-name">Kitsune</div>
-      <button class="claim-btn" onclick="openModal('Kitsune', 'https://i.postimg.cc/6qDVs3LH/gw1.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/xC7m59F2/Swan.webp" alt="Swan" />
-      <div class="item-name">Swan</div>
-      <button class="claim-btn" onclick="openModal('Swan', 'https://i.postimg.cc/xC7m59F2/Swan.webp')">Claim</button>
-    </div>
-           <div class="item-card">
-      <img src="https://i.postimg.cc/fRr97x2P/Grizzly-Bear.webp" alt="Grizzly" />
-      <div class="item-name">Grizzly</div>
-      <button class="claim-btn" onclick="openModal('Grizzly', 'https://i.postimg.cc/fRr97x2P/Grizzly-Bear.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/8cVWw313/gw2.webp" alt="Red Fox" />
-      <div class="item-name">Red Fox</div>
-      <button class="claim-btn" onclick="openModal('Red Fox', 'https://i.postimg.cc/8cVWw313/gw2.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/JnCGWk9H/gw3.webp" alt="Mimic Octopus" />
-      <div class="item-name">Mimic Octopus</div>
-      <button class="claim-btn" onclick="openModal('Mimic Octopus', 'https://i.postimg.cc/JnCGWk9H/gw3.webp')">Claim</button>
-    </div>
-      <div class="item-card">
-      <img src="https://i.postimg.cc/13LCctYB/pixie.webp" alt="Pixie Pet" />
-      <div class="item-name">Pixie Pet</div>
-      <button class="claim-btn" onclick="openModal('Pixie Pet', 'https://i.postimg.cc/13LCctYB/pixie.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/W3kqftjw/Phoenix.webp" alt="Phoenix" />
-      <div class="item-name">Phoenix</div>
-      <button class="claim-btn" onclick="openModal('Phoenix', 'https://i.postimg.cc/W3kqftjw/Phoenix.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/dVS5nqgx/gw5.webp" alt="Raccoon" />
-      <div class="item-name">Raccoon</div>
-      <button class="claim-btn" onclick="openModal('Raccoon', 'https://i.postimg.cc/dVS5nqgx/gw5.webp')">Claim</button>
-    </div>
-      <div class="item-card">
-      <img src="https://i.postimg.cc/1R6dWpZF/Imp.webp" alt="Imp Pet" />
-      <div class="item-name">Imp Pet</div>
-      <button class="claim-btn" onclick="openModal('Imp Pet', 'https://i.postimg.cc/1R6dWpZF/Imp.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/3xRF6sT0/gr5.webp" alt="T-Rex" />
-      <div class="item-name">T-Rex</div>
-      <button class="claim-btn" onclick="openModal('T-Rex', 'https://i.postimg.cc/3xRF6sT0/gr5.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/5tScxLfj/Griffin-Pet.webp" alt="Griffin" />
-      <div class="item-name">Griffin</div>
-      <button class="claim-btn" onclick="openModal('Griffin', 'https://i.postimg.cc/5tScxLfj/Griffin-Pet.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/26Gm9FBr/Cockatrice.webp" alt="Cockatrice" />
-      <div class="item-name">Cockatrice</div>
-      <button class="claim-btn" onclick="openModal('Cockatrice', 'https://i.postimg.cc/26Gm9FBr/Cockatrice.webp')">Claim</button>
-    </div>
-       <div class="item-card">
-      <img src="https://i.postimg.cc/nrjZWyBh/Lemon-Lion.webp" alt="Lemon Lion" />
-      <div class="item-name">Lemon Lion</div>
-      <button class="claim-btn" onclick="openModal('Lemon Lion', 'https://i.postimg.cc/nrjZWyBh/Lemon-Lion.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/d0zdnkbQ/GnomePet.webp" alt="Gnome" />
-      <div class="item-name">Gnome</div>
-      <button class="claim-btn" onclick="openModal('Gnome', 'https://i.postimg.cc/d0zdnkbQ/GnomePet.webp')">Claim</button>
-    </div>
-      <div class="item-card">
-      <img src="https://i.postimg.cc/zv9DBJzZ/Apple-Gazelle.webp" alt="Apple Gazelle" />
-      <div class="item-name">Apple Gazelle</div>
-      <button class="claim-btn" onclick="openModal('Apple Gazelle', 'https://i.postimg.cc/zv9DBJzZ/Apple-Gazelle.webp')">Claim</button>
-    </div>
-     <div class="item-card">
-      <img src="https://i.postimg.cc/wB0ZSTBg/butterfly.webp" alt="Butterfly" />
-      <div class="item-name">Butterfly</div>
-      <button class="claim-btn" onclick="openModal('Butterfly', 'https://i.postimg.cc/wB0ZSTBg/butterfly.webp')">Claim</button>
-    </div>
-    <div class="item-card">
-      <img src="https://i.postimg.cc/rs6zMt3t/gr6.png" alt="Blood Owl" />
-      <div class="item-name">Blood Owl</div>
-      <button class="claim-btn" onclick="openModal('Blood Owl', 'https://i.postimg.cc/rs6zMt3t/gr6.png')">Claim</button>
-    </div>
-    <!-- Last existing item -->
-<div class="item-card">
-  <img src="https://i.postimg.cc/C1DLdvmh/Tanchozuru.webp" alt="Tanchuzuru" />
-  <div class="item-name">Tanchuzuru</div>
-  <button class="claim-btn" onclick="openModal('Tanchuzuru', 'https://i.postimg.cc/C1DLdvmh/Tanchozuru.webp')">Claim</button>
-</div>
-    <div class="item-card">
-  <img src="https://i.postimg.cc/nhVdgytH/Golden-Goose.webp" alt="Golden Goose" />
-  <div class="item-name">Golden Goose</div>
-  <button class="claim-btn" onclick="openModal('Golden Goose', 'https://i.postimg.cc/nhVdgytH/Golden-Goose.webp')">Claim</button>
-</div>
+      <!-- Roblox Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Roblox <i class="fa-solid fa-angle-down"></i></button>
+        <div class="dropdown-content">
+          <a href="views/garden.html">Garden</a>
+          <a href="views/robux.html">Robux</a>
+          <!-- <a href="views/diamantes.html">Diamantes</a> -->
+        </div>
+      </div>
 
-<!-- New items start here -->
-<div class="item-card">
-  <img src="https://i.postimg.cc/0ygx3GfD/Corrupted-Kitsune.webp" alt="Corrupted Kitsune" />
-  <div class="item-name">Corrupted Kitsune</div>
-  <button class="claim-btn" onclick="openModal('Corrupted Kitsune', 'https://i.postimg.cc/0ygx3GfD/Corrupted-Kitsune.webp')">Claim</button>
-</div>
+      <a href="views/blog.html">Blog</a>
+      <!-- <a href="views/login.html">Login</a> -->
+    </nav>
 
-<div class="item-card">
-  <img src="https://i.postimg.cc/nhkFDj4m/Dragonfly-Pet.webp" alt="Dragonfly Pet" />
-  <div class="item-name">Dragonfly Pet</div>
-  <button class="claim-btn" onclick="openModal('Dragonfly Pet', 'https://i.postimg.cc/nhkFDj4m/Dragonfly-Pet.webp')">Claim</button>
-</div>
-
-<div class="item-card">
-  <img src="https://i.postimg.cc/zXw5sbPQ/Queen-bee.webp" alt="Queen Bee" />
-  <div class="item-name">Queen Bee</div>
-  <button class="claim-btn" onclick="openModal('Queen Bee', 'https://i.postimg.cc/zXw5sbPQ/Queen-bee.webp')">Claim</button>
-</div>
-
-<div class="item-card">
-  <img src="https://i.postimg.cc/13CxSp0v/Scarlet-Macaw-Icon.webp" alt="Scarlet Macaw" />
-  <div class="item-name">Scarlet Macaw</div>
-  <button class="claim-btn" onclick="openModal('Scarlet Macaw', 'https://i.postimg.cc/13CxSp0v/Scarlet-Macaw-Icon.webp')">Claim</button>
-</div>
-    <div class="item-card">
-  <img src="https://i.postimg.cc/vmzf4RsD/disco.webp" alt="Disco Bee" />
-  <div class="item-name">Disco Bee</div>
-  <button class="claim-btn" onclick="openModal('Disco Bee', 'https://i.postimg.cc/vmzf4RsD/disco.webp')">Claim</button>
-</div>
-<!-- 🔹 French Fry Ferret -->
-<div class="item-card">
-  <img src="https://i.postimg.cc/DfQTb9Qy/french.webp" alt="French Fry Ferret" />
-  <div class="item-name">French Fry Ferret</div>
-  <button class="claim-btn" onclick="openModal('French Fry Ferret', 'https://i.postimg.cc/DfQTb9Qy/french.webp')">Claim</button>
-</div>
-
-<!-- 🔹 Mizuchi -->
-<div class="item-card">
-  <img src="https://i.postimg.cc/Bnkyzp5V/Mizuchi.webp" alt="Mizuchi" />
-  <div class="item-name">Mizuchi</div>
-  <button class="claim-btn" onclick="openModal('Mizuchi', 'https://i.postimg.cc/Bnkyzp5V/Mizuchi.webp')">Claim</button>
-</div>
-    <div class="item-card">
-  <img src="https://i.postimg.cc/zDcKhSgv/Lobster-Thermidor.webp" alt="Lobster Thermidor" />
-  <div class="item-name">Lobster Thermidor</div>
-  <button class="claim-btn" onclick="openModal('Lobster Thermidor', 'https://i.postimg.cc/zDcKhSgv/Lobster-Thermidor.webp')">Claim</button>
-</div>
-
-    <div class="item-card">
-  <img src="https://i.postimg.cc/Rhdmn2fB/candy-blossom.webp" alt="Candy Blossom" />
-  <div class="item-name">Candy Blossom</div>
-  <button class="claim-btn" onclick="openModal('Candy Blossom', 'https://i.postimg.cc/Rhdmn2fB/candy-blossom.webp')">Claim</button>
-</div>
-      <div class="item-card">
-  <img src="https://i.postimg.cc/Y9MWzSrt/Cyclamen.webp" alt="Cyclamen" />
-  <div class="item-name">Cyclamen</div>
-  <button class="claim-btn" onclick="openModal('Cyclamen', 'https://i.postimg.cc/Y9MWzSrt/Cyclamen.webp')">Claim</button>
-</div>
- <div class="item-card">
-  <img src="https://i.postimg.cc/v8jq0bz0/grand-tomato.webp" alt="Grand Tomato" />
-  <div class="item-name">Grand Tomato</div>
-  <button class="claim-btn" onclick="openModal('Grand Tomato', 'https://i.postimg.cc/v8jq0bz0/grand-tomato.webp')">Claim</button>
-</div>
-<div class="item-card">
-  <img src="https://i.postimg.cc/MKfqd3yz/Bone-Blossom.webp" alt="Bone Blossom" />
-  <div class="item-name">Bone Blossom</div>
-  <button class="claim-btn" onclick="openModal('Bone Blossom', 'https://i.postimg.cc/MKfqd3yz/Bone-Blossom.webp')">Claim</button>
-</div>
-
-<div class="item-card">
-  <img src="https://i.postimg.cc/d3tXg37b/Sugar-Apple.webp" alt="Sugar Apple" />
-  <div class="item-name">Sugar Apple</div>
-  <button class="claim-btn" onclick="openModal('Sugar Apple', 'https://i.postimg.cc/d3tXg37b/Sugar-Apple.webp')">Claim</button>
-</div>
-
-<div class="item-card">
-  <img src="https://i.postimg.cc/8c0y3Hgv/Flower-Seed-Pack.webp" alt="x10 Flower Pack" />
-  <div class="item-name">x10 Flower Pack</div>
-  <button class="claim-btn" onclick="openModal('x10 Flower Pack', 'https://i.postimg.cc/8c0y3Hgv/Flower-Seed-Pack.webp')">Claim</button>
-</div>
-    <div class="item-card">
-  <img src="https://i.postimg.cc/Rhv7LcHZ/Romanesco-Produce.webp" alt="Romanesco Seeds" />
-  <div class="item-name">Romanesco Seeds</div>
-  <button class="claim-btn" onclick="openModal('Romanesco Seeds', 'https://i.postimg.cc/Rhv7LcHZ/Romanesco-Produce.webp')">Claim</button>
-</div>
-
-  </div>
-
-  <!-- Claim Modal -->
-  <div id="claimModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-heading">Get your item for free!</div>
-      <img id="modalImage" src="" alt="Item Image">
-      <div class="modal-title" id="modalItemName"></div>
-      <input type="text" id="usernameInput" class="input-field" placeholder="Enter your Roblox username" />
-      <button class="final-claim-btn" onclick="submitClaim()">Claim Now</button>
-      <button class="close-btn" onclick="closeModal()">Cancel</button>
+    <div class="theme-toggle">
+      <i class="fa-regular fa-sun"></i>
     </div>
-  </div>
+  </header>
 
-  <!-- Progress Popup -->
-  <div id="progressPopup" class="modal">
-    <div class="progress-content">
-      Preparing your Item...
-      <div id="progressPercent">0%</div>
+  <!-- 🎞️ Slider Section -->
+  <section class="slide-section">
+    <div class="slide-container" id="slide-container"></div>
+  </section>
+
+  <!-- 🎮 Updated Games -->
+  <section class="updated-games">
+    <div class="games-header">
+      <h2><i class="fa-solid fa-gamepad"></i> Updated Games</h2>
+      <button class="view-all" onclick="location.href='views/games.html'">
+        View All <i class="fa-solid fa-angle-right"></i>
+      </button>
     </div>
-  </div>
+    <div class="games-grid" id="games-container"></div>
+  </section>
 
+  <!-- 📱 Updated Apps -->
+  <section class="updated-games">
+    <div class="games-header">
+      <h2><i class="fa-solid fa-mobile-screen"></i> Updated Apps</h2>
+      <button class="view-all" onclick="location.href='views/apps.html'">
+        View All <i class="fa-solid fa-angle-right"></i>
+      </button>
+    </div>
+    <div class="games-grid" id="apps-container"></div>
+  </section>
+
+  <!-- Script -->
   <script>
-    function openModal(itemName, imageUrl) {
-      document.getElementById('modalImage').src = imageUrl;
-      document.getElementById('modalItemName').innerText = itemName;
-      document.getElementById('claimModal').style.display = 'flex';
-    }
+    // Roblox dropdown toggle for mobile
+    const dropbtn = document.querySelector(".dropbtn");
+    dropbtn.addEventListener("click", () => {
+      document.querySelector(".dropdown").classList.toggle("active");
+    });
 
-    function closeModal() {
-      document.getElementById('claimModal').style.display = 'none';
-      document.getElementById('usernameInput').value = '';
-    }
+    async function loadContent() {
+      try {
+        // Load slides
+        const slideRes = await fetch("data/slide.json");
+        const slides = await slideRes.json();
+        const slideContainer = document.getElementById("slide-container");
+        slideContainer.innerHTML = "";
+        slides.forEach(item => {
+          const card = document.createElement("div");
+          card.classList.add("slide-card");
+          card.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <h2>${item.title}</h2>
+            <p>${item.description}</p>
+          `;
+          slideContainer.appendChild(card);
+        });
 
-    function submitClaim() {
-      const username = document.getElementById('usernameInput').value.trim();
-      const item = document.getElementById('modalItemName').innerText;
+        // Load games and apps
+        const response = await fetch("data/games.json");
+        const data = await response.json();
 
-      if (!username) {
-        alert('Please enter your Roblox username.');
-        return;
+        const gamesContainer = document.getElementById("games-container");
+        const appsContainer = document.getElementById("apps-container");
+
+        gamesContainer.innerHTML = "";
+        appsContainer.innerHTML = "";
+
+        // 🎮 Games
+        const games = data.filter(item => item.type === "game").slice(0, 6);
+        games.forEach(item => {
+          const card = document.createElement("div");
+          card.classList.add("game-card");
+          card.innerHTML = `
+            <div class="game-image">
+              <img src="${item.image}" alt="${item.title}">
+              <span class="tag">MOD</span>
+            </div>
+            <div class="game-info">
+              <h3>${item.title}</h3>
+              <p class="small-text">Size: ${item.size}</p>
+              <p class="small-text">Version: ${item.version} <span class="mod-text">MOD</span></p>
+              <small>📅 ${item.date}</small>
+            </div>
+            <span class="status updated">UPDATED</span>
+          `;
+          gamesContainer.appendChild(card);
+        });
+
+        // 📱 Apps
+        const apps = data.filter(item => item.type === "app").slice(0, 6);
+        apps.forEach(item => {
+          const card = document.createElement("div");
+          card.classList.add("game-card");
+          card.innerHTML = `
+            <div class="game-image">
+              <img src="${item.image}" alt="${item.title}">
+              <span class="tag">MOD</span>
+            </div>
+            <div class="game-info">
+              <h3>${item.title}</h3>
+              <p class="small-text">Size: ${item.size}</p>
+              <p class="small-text">Version: ${item.version} <span class="mod-text">MOD</span></p>
+              <small>📅 ${item.date}</small>
+            </div>
+            <span class="status updated">UPDATED</span>
+          `;
+          appsContainer.appendChild(card);
+        });
+      } catch (error) {
+        console.error("Error loading data:", error);
       }
-
-      closeModal();
-
-      const progressPopup = document.getElementById('progressPopup');
-      const progressPercent = document.getElementById('progressPercent');
-      let progress = 0;
-
-      progressPopup.style.display = 'flex';
-      progressPercent.textContent = '0%';
-
-      const interval = setInterval(() => {
-        progress += 1;
-        progressPercent.textContent = progress + '%';
-
-        if (progress >= 100) {
-          clearInterval(interval);
-          progressPopup.style.display = 'none';
-
-          // NEW content locker triggers after username input
-          if (typeof _ZU === "function") {
-            _ZU();
-          }
-
-          if (typeof _CS === "function") {
-            _CS();
-          } else {
-            console.warn('_CS() function not loaded yet.');
-          }
-        }
-      }, 30);
     }
-  </script>
 
+    loadContent();
+  </script>
 </body>
 </html>

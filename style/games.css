@@ -1,0 +1,197 @@
+/* 🌑 Dark Theme Variables */
+:root {
+  --primary: #38bdf8;
+  --secondary: #10b981;
+  --dark-bg: #0f172a;
+  --card-bg: #1e293b;
+  --text-light: #f1f5f9;
+  --text-muted: #94a3b8;
+}
+
+/* 🌍 Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: var(--dark-bg);
+  color: var(--text-light);
+  min-height: 100vh;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px; /* bottom space */
+}
+
+/* ✅ Header */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: var(--card-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.logo span {
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.menu {
+  display: flex;
+  gap: 25px;
+}
+
+.menu a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: var(--primary);
+}
+
+.theme-toggle {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--primary);
+}
+
+/* ✅ Page Content */
+.page-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 20px; /* ✅ padding left/right to see container */
+}
+
+/* 🎮 Games Grid */
+.games-grid {
+  display: grid;
+  padding-top: 25px;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row on PC */
+  gap: 20px;
+  width: 100%;
+}
+
+/* Game Card */
+.game-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+  border-left: 5px solid var(--secondary);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+
+/* Game Image */
+.game-card .game-image {
+  position: relative;
+}
+
+.game-card .game-image img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* MOD badge bottom-left */
+.game-card .tag {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  background-color: #dc2626;
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+/* UPDATED badge top-right */
+.game-card .status {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: inline-block;
+  background-color: #16a34a;
+  color: #fff;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+/* Game Info Text */
+.game-info h3 {
+  color: var(--primary);
+  font-size: 0.9rem; /* smaller for professional style */
+  margin: 0 0 2px 0;
+}
+
+.game-info p {
+  color: var(--text-light);
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.game-info small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  margin-top: 2px;
+}
+
+/* 📱 Responsive */
+@media (max-width: 1024px) {
+  .page-content {
+    padding: 0 15px;
+  }
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 0 10px;
+  }
+  .games-grid {
+    grid-template-columns: 1fr; /* 1 card per row on mobile */
+  }
+  .game-card {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px;
+  }
+  .game-card img {
+    width: 70px;
+    height: 70px;
+  }
+  .game-info h3 {
+    font-size: 0.85rem;
+  }
+  .game-info p {
+    font-size: 0.7rem;
+  }
+}

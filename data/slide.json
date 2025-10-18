@@ -1,0 +1,18 @@
+[
+    {
+      "title": "YouTube Music",
+      "description": "Listen to your favorite tracks without ads and download for offline.",
+      "image": "../images/Logo.jpg"
+    },
+    {
+      "title": "CapCut Premium",
+      "description": "Edit your videos easily with premium unlocked features.",
+      "image": "../images/Logo.jpg"
+    },
+    {
+      "title": "YouTube Premium",
+      "description": "Enjoy all YouTube content ad-free and in background mode.",
+      "image": "../images/Logo.jpg"
+    }
+  ]
+  
