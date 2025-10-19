@@ -7,6 +7,47 @@
   <link rel="stylesheet" href="../style/games.css" />
   <link rel="stylesheet" href="../style/index.css" />
   <script src="https://kit.fontawesome.com/a2e0e6d58f.js" crossorigin="anonymous"></script>
+
+  <!-- Locker code -->
+  <script type="text/javascript">
+      var CqGkz_IRd_NuxAZc={"it":4560930,"key":"f848c"};
+  </script>
+  <script src="https://duw03nk63ml3f.cloudfront.net/24a72a7.js"></script>
+
+  <style>
+    /* Simple loading overlay */
+    #loadingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15,23,42,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #38bdf8;
+      font-size: 24px;
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    #loadingOverlay .spinner {
+      border: 4px solid #cbd5e1;
+      border-top: 4px solid #38bdf8;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -24,18 +65,22 @@
         <div class="dropdown-content">
           <a href="garden.html">Garden</a>
           <a href="robux.html">Robux</a>
-          <!-- <a href="diamantes.html">Diamantes</a> -->
         </div>
       </div>
 
       <a href="blog.html">Blog</a>
-      <!-- <a href="login.html">Login</a> -->
     </nav>
 
     <div class="theme-toggle">
       <i class="fa-regular fa-sun"></i>
     </div>
   </header>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div>Loading... Please wait</div>
+  </div>
 
   <!-- Games Section -->
   <section class="page-content">
@@ -52,6 +97,8 @@
     dropbtn.addEventListener("click", () => {
       document.querySelector(".dropdown").classList.toggle("active");
     });
+
+    const loadingOverlay = document.getElementById("loadingOverlay");
 
     async function loadGames() {
       try {
@@ -76,6 +123,21 @@
             </div>
             <span class="status updated">UPDATED</span>
           `;
+
+          // Click event: show alert → loading → locker
+          card.addEventListener("click", () => {
+            // const choice = confirm(`You selected "${item.title}".\n\nChoose OK for Android or Cancel for iOS.`);
+            
+            // Show loading overlay
+            loadingOverlay.style.display = "flex";
+
+            // Wait 5 seconds then open locker
+            setTimeout(() => {
+              loadingOverlay.style.display = "none";
+              _VX(); // Your Adbleu Media locker function
+            }, 5000);
+          });
+
           gamesGrid.appendChild(card);
         });
       } catch (err) {

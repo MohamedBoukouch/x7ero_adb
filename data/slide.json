@@ -1,18 +1,31 @@
 [
     {
-      "title": "YouTube Music",
+      "id" : 1,
+      "title": "Gifting Robux",
       "description": "Listen to your favorite tracks without ads and download for offline.",
-      "image": "../images/Logo.jpg"
+      "image": "../images/articls/roblox.jpg",
+      "link" : "https://en.help.roblox.com/hc/en-us/articles/36034470178324-Gifting-Robux"
     },
     {
-      "title": "CapCut Premium",
-      "description": "Edit your videos easily with premium unlocked features.",
-      "image": "../images/Logo.jpg"
+      "id" : 2,
+      "title": "Top 10 Games of 2024",
+      "description": "Listen to your favorite tracks without ads and download for offline.",
+      "image": "../images/articls/top_games.jpeg",
+      "link" : "https://boardgamegeek.com/blog/12919/blogpost/170450/my-top-10-games-of-2024"
     },
     {
-      "title": "YouTube Premium",
-      "description": "Enjoy all YouTube content ad-free and in background mode.",
-      "image": "../images/Logo.jpg"
+      "id" : 3,
+      "title": "Grow a Garden",
+      "description": "Listen to your favorite tracks without ads and download for offline.",
+      "image": "../images/articls/s-l400.png",
+      "link" : "https://www.bbc.com/news/articles/cj4edkdxz2xo"
+    },
+    {
+      "id" : 4,
+      "title": "Euro Truck Simulator 2",
+      "description": "Listen to your favorite tracks without ads and download for offline.",
+      "image": "../images/articls/american-truck-simulator.webp",
+      "link" : "https://eurotrucksimulator2.com/"
     }
   ]
   
