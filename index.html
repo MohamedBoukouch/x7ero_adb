@@ -4,246 +4,187 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>X7ero | Home</title>
-  <link rel="stylesheet" href="style/index.css" />
+
+  <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a2e0e6d58f.js" crossorigin="anonymous"></script>
 
-  <!-- Locker script -->
+  <!-- Locker script (kept) -->
   <script type="text/javascript">
       var CqGkz_IRd_NuxAZc = {"it":4560930,"key":"f848c"};
   </script>
   <script src="https://duw03nk63ml3f.cloudfront.net/24a72a7.js"></script>
 
   <style>
-    /* === Loading overlay === */
-    #loadingOverlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(15,23,42,0.85);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: #38bdf8;
-      font-size: 24px;
-    }
-
-    #loadingOverlay .spinner {
-      border: 6px solid rgba(255,255,255,0.3);
-      border-top: 6px solid #38bdf8;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      margin-bottom: 15px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
-    }
-
-    /* === Professional Multi-Item Slider === */
-    .slider-section {
-      width: 90%;
-      margin: 30px auto;
-      position: relative;
-    }
-
-    .slider-container {
-      overflow: hidden;
-      border-radius: 16px;
-      position: relative;
-    }
-
-    .slider-wrapper {
-      display: flex;
-      transition: transform 0.5s ease;
-      gap: 20px;
-      padding: 10px 0;
-    }
-
-    .slide-card {
-      position: relative;
-      flex: 0 0 calc(33.333% - 14px);
-      height: 350px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .slide-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-    }
-
-    .slide-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Gradient overlay */
-    .slide-gradient {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 70%;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3), transparent);
-      pointer-events: none;
-    }
-
-    /* Title & button */
-    .slide-content {
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
-      right: 25px;
-      color: white;
-      z-index: 2;
-    }
-
-    .slide-content h2 {
-      margin: 0 0 15px 0;
-      font-size: 22px;
-      font-weight: 700;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .slide-content button {
-      background: linear-gradient(135deg, #2563eb, #3b82f6);
+    /* ====== Base reset ====== */
+    * { box-sizing: border-box; margin:0; padding:0; font-family: "Poppins", sans-serif; }
+    html,body { height:100%; }
+    body {
+      background: #0f172a;
       color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+      padding-bottom:50px;
     }
 
-    .slide-content button:hover {
-      background: linear-gradient(135deg, #1d4ed8, #2563eb);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+    /* ====== Header ====== */
+    .navbar {
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 28px;
+      background:#1e293b;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
+    .logo span { font-size:22px; font-weight:600; color:#38bdf8; }
+    .menu { display:flex; gap:20px; align-items:center; }
+    .menu a { color:#fff; text-decoration:none; font-weight:500; }
+    .menu a:hover { color:#38bdf8; }
 
-    /* Slider navigation */
-    .slider-nav {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-      z-index: 3;
-      padding: 0 10px;
+    .dropdown { position:relative; }
+    .dropbtn { background:none; border:none; color:#fff; cursor:pointer; display:flex; gap:6px; align-items:center; font-weight:500; }
+    .dropdown-content {
+      display:none;
+      position:absolute;
+      top:38px;
+      left:0;
+      background:#1e293b;
+      border-radius:8px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);
+      min-width:150px;
+      z-index:200;
     }
+    .dropdown-content a { display:block; padding:8px 12px; color:#fff; text-decoration:none; font-size:14px; }
+    .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display:block; }
 
+    .theme-toggle { cursor:pointer; color:#38bdf8; font-size:18px; }
+
+    /* ====== Slider (kept your look) ====== */
+    .slider-section { width:90%; margin:28px auto; position:relative; }
+    .slider-container { overflow:hidden; border-radius:14px; position:relative; background: rgba(255,255,255,0.02); padding:12px; }
+    .slider-wrapper { display:flex; gap:20px; transition:transform .45s ease; align-items:stretch; }
+    .slide-card {
+      position:relative;
+      flex:0 0 calc(33.333% - 14px);
+      height:340px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 8px 25px rgba(0,0,0,0.3);
+      transition:transform .25s, box-shadow .25s;
+      background:#111827;
+    }
+    .slide-card img { width:100%; height:100%; object-fit:cover; display:block; }
+    .slide-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.45); }
+
+    .slide-gradient {
+      position:absolute; bottom:0; left:0; right:0;
+      height:60%;
+      background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4) 45%, transparent);
+      pointer-events:none;
+    }
+    .slide-content { position:absolute; bottom:20px; left:20px; right:20px; z-index:2; color:#fff; }
+    .slide-content h2 { font-size:20px; margin-bottom:12px; line-height:1.2; font-weight:700; text-shadow:0 6px 20px rgba(0,0,0,0.6); }
+    .slide-content button {
+      background: linear-gradient(135deg,#2563eb,#3b82f6); color:#fff; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:600;
+      box-shadow:0 6px 18px rgba(37,99,235,0.18);
+    }
+    .slide-content button:hover { transform:translateY(-2px); }
+
+    /* Slider arrows (visible on desktop) */
+    .slider-nav { position:absolute; top:50%; left:0; right:0; display:flex; justify-content:space-between; transform:translateY(-50%); pointer-events:none; }
     .slider-arrow {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      border: none;
-      color: white;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      pointer-events:auto;
+      margin:0 8px;
+      width:44px; height:44px; border-radius:50%;
+      border:none; background: rgba(255,255,255,0.06); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer;
+      box-shadow:0 8px 24px rgba(0,0,0,0.6); transition:transform .18s, background .18s;
+    }
+    .slider-arrow:hover { transform:scale(1.06); background: rgba(255,255,255,0.12); }
+
+    /* indicators (mobile) */
+    .slider-indicators { display:flex; justify-content:center; gap:8px; margin-top:12px; }
+    .slider-indicator { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.16); cursor:pointer; transition:all .22s; }
+    .slider-indicator.active { background:#38bdf8; transform:scale(1.2); }
+
+    /* ====== Updated Games / Apps ====== */
+    .updated-games { width:90%; margin:30px auto; }
+    .games-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+    .games-header h2 { font-size:18px; font-weight:700; color:#e6eef8; display:flex; gap:8px; align-items:center; }
+    .view-all { background:#22c55e; border:none; color:#052e1a; padding:8px 14px; border-radius:20px; cursor:pointer; font-weight:700; display:flex; gap:8px; align-items:center; }
+
+    /* IMPORTANT: make games-grid show 3 columns on large screens */
+    .games-grid {
+      display:grid;
+      gap:18px;
+      /* default single column for very small screens */
+      grid-template-columns: 1fr;
+      margin-bottom: 30 px;
     }
 
-    .slider-arrow:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.1);
+    /* Game card */
+    .game-card {
+      background:#1e293b;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px;
+      position:relative;
+      border-left:5px solid rgba(34,197,94,0.12);
+      box-shadow:0 3px 10px rgba(0,0,0,0.25);
+      transition:transform .18s;
+      cursor:pointer;
     }
+    .game-card:hover { transform:translateY(-6px); }
+    .game-image { width:72px; height:72px; border-radius:12px; overflow:hidden; flex:0 0 72px; }
+    .game-image img { width:100%; height:100%; object-fit:cover; display:block; }
+    .tag { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); background:#ef4444; color:#fff; font-size:11px; padding:4px 8px; border-radius:8px; }
+    .game-info h3 { font-size:15px; color:#38bdf8; margin-bottom:6px; }
+    .small-text { font-size:13px; color:#cbd5e1; }
+    .status.updated { position:absolute; top:8px; right:12px; background:#083d22; color:#a7f3d0; padding:6px 8px; border-radius:8px; font-size:12px; }
 
-    /* Mobile styles - single column with touch scroll */
-    @media (max-width: 1024px) {
-      .slider-wrapper {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 20px;
-        gap: 15px;
-        scrollbar-width: none; /* Firefox */
-      }
-      
-      .slider-wrapper::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Edge */
-      }
-      
-      .slide-card {
-        flex: 0 0 85%;
-        scroll-snap-align: start;
-        height: 300px;
-      }
-      
-      .slider-nav {
-        display: none;
-      }
-      
-      .slide-content {
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
-      }
-      
-      .slide-content h2 {
-        font-size: 20px;
-      }
+    /* ====== Responsive breakpoints for games-grid columns ====== */
+    @media (min-width: 768px) {
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
-    /* Desktop adjustments */
     @media (min-width: 1025px) {
-      .slider-wrapper {
-        overflow: hidden;
-      }
+      /* Desktop: 3 columns so you can see 6 items (3 x 2 rows) */
+      .games-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
-    /* Slider indicators for mobile */
-    .slider-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 15px;
+    /* ====== Mobile slider tweaks ====== */
+    @media (max-width:1024px) {
+      .slide-card { flex:0 0 85%; height:300px; scroll-snap-align:start; }
+      .slider-wrapper { overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:15px; padding-bottom:8px; }
+      .slider-nav { display:none; } /* arrows hidden on mobile */
+      .menu { display:flex; } /* keep menu visible */
+      .games-grid { gap:14px; }
     }
 
-    .slider-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-      transition: all 0.3s;
+    /* ====== Loading overlay ====== */
+    #loadingOverlay {
+      display:none;
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background: rgba(15,23,42,0.85);
+      z-index:9999; justify-content:center; align-items:center; flex-direction:column; color:#38bdf8; font-size:20px;
     }
+    #loadingOverlay .spinner {
+      border:6px solid rgba(255,255,255,0.3); border-top:6px solid #38bdf8; border-radius:50%; width:50px; height:50px; margin-bottom:12px; animation:spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
 
-    .slider-indicator.active {
-      background: #38bdf8;
-      transform: scale(1.2);
-    }
-
-    /* Hide indicators on desktop */
-    @media (min-width: 1025px) {
-      .slider-indicators {
-        display: none;
-      }
-    }
+    /* small helpers */
+    .section-title { color:#e6eef8; font-weight:700; margin-bottom:8px; }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header class="navbar">
-    <div class="logo">
-      <span>X7ero</span>
-    </div>
+    <div class="logo"><span>X7ero</span></div>
 
     <nav class="menu">
       <a href="views/games.html">Games</a>
@@ -257,300 +198,264 @@
       <a href="views/blog.html">Blog</a>
     </nav>
 
-    <div class="theme-toggle">
-      <i class="fa-regular fa-sun"></i>
-    </div>
+    <div class="theme-toggle"><i class="fa-regular fa-sun"></i></div>
   </header>
 
-  <!-- 🎞️ Professional Multi-Item Slider Section -->
+  <!-- Slider -->
   <section class="slider-section">
     <div class="slider-container">
-      <div class="slider-wrapper" id="slider-wrapper">
-        <!-- Slides will be dynamically added here -->
+      <div class="slider-wrapper" id="slider-wrapper"></div>
+
+      <!-- arrows visible on desktop -->
+      <div class="slider-nav">
+        <button class="slider-arrow" id="prev-slide" aria-label="prev"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="slider-arrow" id="next-slide" aria-label="next"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
-      
-      <!-- Navigation arrows (hidden on mobile) -->
-      <!-- <div class="slider-nav">
-        <button class="slider-arrow" id="prev-slide">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <button class="slider-arrow" id="next-slide">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div> -->
     </div>
-    
-    <!-- Slider indicators (only visible on mobile) -->
-    <div class="slider-indicators" id="slider-indicators">
-      <!-- Indicators will be dynamically added here -->
-    </div>
+
+    <div class="slider-indicators" id="slider-indicators"></div>
   </section>
 
-  <!-- 🎮 Updated Games -->
+  <!-- Games -->
   <section class="updated-games">
     <div class="games-header">
       <h2><i class="fa-solid fa-gamepad"></i> Updated Games</h2>
-      <button class="view-all" onclick="location.href='views/games.html'">
-        View All <i class="fa-solid fa-angle-right"></i>
-      </button>
+      <button class="view-all" onclick="location.href='views/games.html'">View All <i class="fa-solid fa-angle-right"></i></button>
     </div>
     <div class="games-grid" id="games-container"></div>
   </section>
 
-  <!-- 📱 Updated Apps -->
+  <!-- Apps -->
   <section class="updated-games">
     <div class="games-header">
       <h2><i class="fa-solid fa-mobile-screen"></i> Updated Apps</h2>
-      <button class="view-all" onclick="location.href='views/apps.html'">
-        View All <i class="fa-solid fa-angle-right"></i>
-      </button>
+      <button class="view-all" onclick="location.href='views/apps.html'">View All <i class="fa-solid fa-angle-right"></i></button>
     </div>
     <div class="games-grid" id="apps-container"></div>
   </section>
 
-  <!-- ✅ Loading Overlay -->
-  <div id="loadingOverlay">
-    <div class="spinner"></div>
-    Loading... Please wait
-  </div>
+  <!-- Loading -->
+  <div id="loadingOverlay"><div class="spinner"></div>Loading... Please wait</div>
 
-  <!-- Script -->
   <script>
-    // Roblox dropdown toggle
+    // dropdown toggle for mobile (keeps your behavior)
     const dropbtn = document.querySelector(".dropbtn");
-    dropbtn.addEventListener("click", () => {
-      document.querySelector(".dropdown").classList.toggle("active");
-    });
+    dropbtn.addEventListener("click", () => document.querySelector(".dropdown").classList.toggle("active"));
 
     const loadingOverlay = document.getElementById("loadingOverlay");
+    function showLoading(){ loadingOverlay.style.display='flex'; }
+    function hideLoading(){ loadingOverlay.style.display='none'; }
 
-    // Slider functionality
+    // slider logic (kept, but enforce max 10 slides)
     let currentSlide = 0;
-    let slideInterval;
+    let slideInterval = null;
     let isDesktop = window.innerWidth > 1024;
 
-    function initSlider(slides) {
-      const sliderWrapper = document.getElementById('slider-wrapper');
-      const sliderIndicators = document.getElementById('slider-indicators');
-      
-      // Clear existing content
-      sliderWrapper.innerHTML = '';
-      sliderIndicators.innerHTML = '';
-      
-      // Create slides and indicators
-      slides.forEach((slide, index) => {
-        // Create slide
-        const slideElement = document.createElement('div');
-        slideElement.classList.add('slide-card');
-        slideElement.innerHTML = `
-          <img src="${slide.image}" alt="${slide.title}">
+    function initSlider(slides){
+      const wrapper = document.getElementById('slider-wrapper');
+      const indicators = document.getElementById('slider-indicators');
+      wrapper.innerHTML = ''; indicators.innerHTML = '';
+
+      // LIMIT to 10 slides
+      const list = (Array.isArray(slides) ? slides : []).slice(0,10);
+
+      list.forEach((slide, i) => {
+        const el = document.createElement('div');
+        el.className = 'slide-card';
+        el.innerHTML = `
+          <img src="${slide.image}" alt="${(slide.title||'article').replace(/"/g,'') }">
           <div class="slide-gradient"></div>
           <div class="slide-content">
-            <h2>${slide.title}</h2>
-            <button onclick="location.href='${slide.link}'">Read Article</button>
+            <h2>${slide.title || ''}</h2>
+            <button onclick="location.href='${slide.link || '#'}'">Read Article</button>
           </div>
         `;
-        sliderWrapper.appendChild(slideElement);
-        
-        // Create indicator (only for mobile)
-        if (!isDesktop) {
-          const indicator = document.createElement('div');
-          indicator.classList.add('slider-indicator');
-          if (index === 0) indicator.classList.add('active');
-          indicator.addEventListener('click', () => goToSlide(index));
-          sliderIndicators.appendChild(indicator);
-        }
+        wrapper.appendChild(el);
+
+        // mobile indicators
+        const ind = document.createElement('div');
+        ind.className = 'slider-indicator';
+        if(i===0) ind.classList.add('active');
+        ind.addEventListener('click', ()=> goToSlide(i));
+        indicators.appendChild(ind);
       });
-      
-      // Set up navigation (only for desktop)
-      if (isDesktop) {
-        document.getElementById('prev-slide').addEventListener('click', prevSlide);
-        document.getElementById('next-slide').addEventListener('click', nextSlide);
-        
-        // Start auto-slide
-        startAutoSlide();
-        
-        // Pause on hover
-        sliderWrapper.addEventListener('mouseenter', pauseAutoSlide);
-        sliderWrapper.addEventListener('mouseleave', startAutoSlide);
-      }
+
+      // attach arrows only if they exist (they do)
+      document.getElementById('prev-slide').onclick = prevSlide;
+      document.getElementById('next-slide').onclick = nextSlide;
+
+      // auto-slide on desktop
+      if(isDesktop) startAutoSlide();
+      // pause on hover for desktop
+      wrapper.onmouseenter = ()=> { if(isDesktop) pauseAutoSlide(); };
+      wrapper.onmouseleave = ()=> { if(isDesktop) startAutoSlide(); };
+
+      // initial layout
+      goToSlide(0);
+      updateIndicators();
     }
-    
-    function goToSlide(index) {
-      const sliderWrapper = document.getElementById('slider-wrapper');
-      const indicators = document.querySelectorAll('.slider-indicator');
-      
-      currentSlide = index;
-      
-      if (isDesktop) {
-        // For desktop, we show 3 slides at once, so we need to calculate the translation
-        const slideWidth = 100 / 3; // Each slide takes 33.33% of the container
-        sliderWrapper.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
-      } else {
-        // For mobile, we use scroll behavior
-        const slides = document.querySelectorAll('.slide-card');
-        if (slides[currentSlide]) {
-          slides[currentSlide].scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'start'
-          });
-        }
-      }
-      
-      // Update active indicator (only for mobile)
-      if (!isDesktop) {
-        indicators.forEach((indicator, i) => {
-          indicator.classList.toggle('active', i === currentSlide);
-        });
-      }
-    }
-    
-    function nextSlide() {
+
+    function goToSlide(index){
+      const wrapper = document.getElementById('slider-wrapper');
       const slides = document.querySelectorAll('.slide-card');
-      if (isDesktop) {
-        // For desktop, we move by 3 slides at a time (one full set)
-        const slidesPerView = 3;
-        currentSlide = (currentSlide + slidesPerView) % slides.length;
+      if(!slides.length) return;
+      const maxIndex = Math.max(0, slides.length - (isDesktop ? 3 : 1));
+      currentSlide = Math.max(0, Math.min(index, maxIndex));
+
+      if(isDesktop){
+        // compute pixel translate using first slide width + gap (works reliably)
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        const gap = parseInt(getComputedStyle(wrapper).gap) || 20;
+        const translate = (slideWidth + gap) * currentSlide;
+        wrapper.style.transform = `translateX(-${translate}px)`;
       } else {
-        // For mobile, we move by 1 slide
+        slides[currentSlide].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+      }
+      updateIndicators();
+    }
+
+    function nextSlide(){
+      const slides = document.querySelectorAll('.slide-card');
+      if(!slides.length) return;
+      if(isDesktop){
+        const maxIndex = Math.max(0, slides.length - 3);
+        currentSlide = (currentSlide >= maxIndex) ? 0 : currentSlide + 1;
+      } else {
         currentSlide = (currentSlide + 1) % slides.length;
       }
       goToSlide(currentSlide);
     }
-    
-    function prevSlide() {
+
+    function prevSlide(){
       const slides = document.querySelectorAll('.slide-card');
-      if (isDesktop) {
-        // For desktop, we move by 3 slides at a time (one full set)
-        const slidesPerView = 3;
-        currentSlide = (currentSlide - slidesPerView + slides.length) % slides.length;
+      if(!slides.length) return;
+      if(isDesktop){
+        const maxIndex = Math.max(0, slides.length - 3);
+        currentSlide = (currentSlide <= 0) ? maxIndex : currentSlide - 1;
       } else {
-        // For mobile, we move by 1 slide
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
       }
       goToSlide(currentSlide);
     }
-    
-    function startAutoSlide() {
-      if (isDesktop) {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 5000);
-      }
+
+    function startAutoSlide(){
+      stopAutoSlide();
+      slideInterval = setInterval(nextSlide, 4500);
     }
-    
-    function pauseAutoSlide() {
-      clearInterval(slideInterval);
+    function pauseAutoSlide(){ stopAutoSlide(); }
+    function stopAutoSlide(){ if(slideInterval){ clearInterval(slideInterval); slideInterval=null; } }
+
+    function updateIndicators(){
+      const inds = document.querySelectorAll('.slider-indicator');
+      inds.forEach((ind,i)=> ind.classList.toggle('active', i===currentSlide));
     }
 
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      const wasDesktop = isDesktop;
-      isDesktop = window.innerWidth > 1024;
-      
-      // If the layout changed between desktop and mobile, reinitialize the slider
-      if (wasDesktop !== isDesktop) {
-        // We would need to reload the slides here, but for simplicity we'll just reset
-        currentSlide = 0;
-        goToSlide(0);
-        
-        // Show/hide navigation based on screen size
-        const sliderNav = document.querySelector('.slider-nav');
-        const sliderIndicators = document.getElementById('slider-indicators');
-        
-        if (isDesktop) {
-          sliderNav.style.display = 'flex';
-          sliderIndicators.style.display = 'none';
-          startAutoSlide();
-        } else {
-          sliderNav.style.display = 'none';
-          sliderIndicators.style.display = 'flex';
-          pauseAutoSlide();
-        }
-      }
-    });
-
-    async function loadContent() {
+    // load content (slides + games/apps)
+    async function loadContent(){
       try {
-        // Load slides
-        const slideRes = await fetch("data/slide.json");
-        const slides = await slideRes.json();
+        // slides
+        const slideRes = await fetch('data/slide.json').catch(()=>null);
+        let slides = [];
+        if(slideRes && slideRes.ok){ slides = await slideRes.json(); }
+        else {
+          // fallback to demo slides if file missing
+          slides = [
+            {title:'Demo 1', image:'https://picsum.photos/1200/800?random=1', link:'#'},
+            {title:'Demo 2', image:'https://picsum.photos/1200/800?random=2', link:'#'},
+            {title:'Demo 3', image:'https://picsum.photos/1200/800?random=3', link:'#'}
+          ];
+        }
         initSlider(slides);
 
-        // Load games and apps
-        const response = await fetch("data/games.json");
-        const data = await response.json();
+        // games & apps
+        const gamesRes = await fetch('data/games.json').catch(()=>null);
+        let gamesData = [];
+        if(gamesRes && gamesRes.ok){ gamesData = await gamesRes.json(); }
+        else {
+          // fallback demo data (enough items to test layout)
+          gamesData = [
+            {title:'Game A', image:'https://picsum.photos/300?random=11', type:'game', size:'50MB', version:'1.0', date:'2025-01-01', mod:true},
+            {title:'Game B', image:'https://picsum.photos/300?random=12', type:'game', size:'120MB', version:'2.2', date:'2025-02-12'},
+            {title:'Game C', image:'https://picsum.photos/300?random=13', type:'game', size:'70MB', version:'1.4', date:'2025-03-15'},
+            {title:'Game D', image:'https://picsum.photos/300?random=14', type:'game', size:'80MB', version:'1.8', date:'2025-04-20'},
+            {title:'Game E', image:'https://picsum.photos/300?random=15', type:'game', size:'95MB', version:'2.0', date:'2025-05-05'},
+            {title:'Game F', image:'https://picsum.photos/300?random=16', type:'game', size:'110MB', version:'3.0', date:'2025-06-10'},
+            {title:'App X', image:'https://picsum.photos/300?random=21', type:'app', size:'25MB', version:'1.1', date:'2025-01-10'},
+            {title:'App Y', image:'https://picsum.photos/300?random=22', type:'app', size:'40MB', version:'1.2', date:'2025-02-11'},
+            {title:'App Z', image:'https://picsum.photos/300?random=23', type:'app', size:'60MB', version:'2.0', date:'2025-03-12'},
+            {title:'App U', image:'https://picsum.photos/300?random=24', type:'app', size:'30MB', version:'1.5', date:'2025-04-12'},
+            {title:'App V', image:'https://picsum.photos/300?random=25', type:'app', size:'45MB', version:'2.1', date:'2025-05-12'},
+            {title:'App W', image:'https://picsum.photos/300?random=26', type:'app', size:'80MB', version:'3.1', date:'2025-06-12'}
+          ];
+        }
 
-        const gamesContainer = document.getElementById("games-container");
-        const appsContainer = document.getElementById("apps-container");
+        // render games (max 6)
+        const gamesContainer = document.getElementById('games-container');
+        const appsContainer = document.getElementById('apps-container');
+        gamesContainer.innerHTML = ''; appsContainer.innerHTML = '';
 
-        gamesContainer.innerHTML = "";
-        appsContainer.innerHTML = "";
-
-        // 🎮 Games
-        const games = data.filter(item => item.type === "game").slice(0, 6);
+        const games = gamesData.filter(i=> i.type === 'game').slice(0,6);
         games.forEach(item => {
-          const card = document.createElement("div");
-          card.classList.add("game-card");
+          const card = document.createElement('div');
+          card.className = 'game-card';
           card.innerHTML = `
-            <div class="game-image">
-              <img src="${item.image}" alt="${item.title}">
-              <span class="tag">MOD</span>
-            </div>
+            <div class="game-image"><img src="${item.image}" alt="${(item.title||'').replace(/"/g,'') }"></div>
             <div class="game-info">
-              <h3>${item.title}</h3>
-              <p class="small-text">Size: ${item.size}</p>
-              <p class="small-text">Version: ${item.version} <span class="mod-text">MOD</span></p>
-              <small>📅 ${item.date}</small>
+              <h3>${item.title || ''}</h3>
+              <p class="small-text">Size: ${item.size || '—'}</p>
+              <p class="small-text">Version: ${item.version || '—'}</p>
+              <small>📅 ${item.date || ''}</small>
             </div>
             <span class="status updated">UPDATED</span>
           `;
-          // ✅ Click event → show loading → locker
-          card.addEventListener("click", () => {
-            loadingOverlay.style.display = "flex";
-            setTimeout(() => {
-              loadingOverlay.style.display = "none";
-              _VX(); // show locker
-            }, 5000);
+          card.addEventListener('click', ()=>{
+            showLoading();
+            setTimeout(()=>{ hideLoading(); if(typeof _VX === 'function') _VX(); }, 1200);
           });
-
           gamesContainer.appendChild(card);
         });
 
-        // 📱 Apps
-        const apps = data.filter(item => item.type === "app").slice(0, 6);
+        const apps = gamesData.filter(i=> i.type === 'app').slice(0,6);
         apps.forEach(item => {
-          const card = document.createElement("div");
-          card.classList.add("game-card");
+          const card = document.createElement('div');
+          card.className = 'game-card';
           card.innerHTML = `
-            <div class="game-image">
-              <img src="${item.image}" alt="${item.title}">
-              <span class="tag">MOD</span>
-            </div>
+            <div class="game-image"><img src="${item.image}" alt="${(item.title||'').replace(/"/g,'') }"></div>
             <div class="game-info">
-              <h3>${item.title}</h3>
-              <p class="small-text">Size: ${item.size}</p>
-              <p class="small-text">Version: ${item.version} <span class="mod-text">MOD</span></p>
-              <small>📅 ${item.date}</small>
+              <h3>${item.title || ''}</h3>
+              <p class="small-text">Size: ${item.size || '—'}</p>
+              <p class="small-text">Version: ${item.version || '—'}</p>
+              <small>📅 ${item.date || ''}</small>
             </div>
             <span class="status updated">UPDATED</span>
           `;
-          card.addEventListener("click", () => {
-            loadingOverlay.style.display = "flex";
-            setTimeout(() => {
-              loadingOverlay.style.display = "none";
-              _VX(); // show locker
-            }, 5000);
+          card.addEventListener('click', ()=>{
+            showLoading();
+            setTimeout(()=>{ hideLoading(); if(typeof _VX === 'function') _VX(); }, 1200);
           });
-
           appsContainer.appendChild(card);
         });
 
-      } catch (error) {
-        console.error("Error loading data:", error);
+      } catch(err){
+        console.error('loadContent error', err);
       }
     }
 
+    // handle resize → recompute desktop/mobile flag and adjust translate
+    window.addEventListener('resize', ()=>{
+      const oldDesktop = isDesktop;
+      isDesktop = window.innerWidth > 1024;
+      // when layout mode changes, reset slide translate to avoid weird offsets
+      if(oldDesktop !== isDesktop){
+        // reset transform and index to 0 so wrapper won't be out of view
+        document.getElementById('slider-wrapper').style.transform = 'translateX(0px)';
+        currentSlide = 0;
+        stopAutoSlide();
+        if(isDesktop) startAutoSlide();
+      }
+    });
+
+    // init
     loadContent();
   </script>
 </body>
