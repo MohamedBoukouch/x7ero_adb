@@ -1,83 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X7ero | Roblox</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X7ero | Home</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="../style/index.css" />
-  <link rel="stylesheet" href="../style/robux.css" />
-
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="./images/Logo.webp">
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/Logo.webp">
-  <link rel="icon" type="image/png" sizes="16x16" href="./images/Logo.webp">
-
-  <!-- FontAwesome -->
+  <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a2e0e6d58f.js" crossorigin="anonymous"></script>
 
-  <!-- Content Locker Script -->
+  <!-- Locker script (kept) -->
   <script type="text/javascript">
-    var cqXeH_LNZ_YNqPvc = {"it":4530265,"key":"55fbb"};
+      var CqGkz_IRd_NuxAZc = {"it":4560930,"key":"f848c"};
   </script>
-  <script src="https://d1y0yks1k8t5m5.cloudfront.net/e613c2a.js"></script>
+  <script src="https://duw03nk63ml3f.cloudfront.net/24a72a7.js"></script>
 
+  <style>
+    /* ====== Base reset ====== */
+    * { box-sizing: border-box; margin:0; padding:0; font-family: "Poppins", sans-serif; }
+    html,body { height:100%; }
+    body {
+      background: #0f172a;
+      color: #fff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      min-height:100vh;
+      padding-bottom:50px;
+    }
+
+    /* ====== Header ====== */
+    .navbar {
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 28px;
+      background:#1e293b;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .logo span { font-size:22px; font-weight:600; color:#38bdf8; }
+    .menu { display:flex; gap:20px; align-items:center; }
+    .menu a { color:#fff; text-decoration:none; font-weight:500; }
+    .menu a:hover { color:#38bdf8; }
+
+    .dropdown { position:relative; }
+    .dropbtn { background:none; border:none; color:#fff; cursor:pointer; display:flex; gap:6px; align-items:center; font-weight:500; }
+    .dropdown-content {
+      display:none;
+      position:absolute;
+      top:38px;
+      left:0;
+      background:#1e293b;
+      border-radius:8px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.4);
+      min-width:150px;
+      z-index:200;
+    }
+    .dropdown-content a { display:block; padding:8px 12px; color:#fff; text-decoration:none; font-size:14px; }
+    .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display:block; }
+
+    .theme-toggle { cursor:pointer; color:#38bdf8; font-size:18px; }
+
+    /* ====== Slider (kept your look) ====== */
+    .slider-section { width:90%; margin:28px auto; position:relative; }
+    .slider-container { overflow:hidden; border-radius:14px; position:relative; background: rgba(255,255,255,0.02); padding:12px; }
+    .slider-wrapper { display:flex; gap:20px; transition:transform .45s ease; align-items:stretch; }
+    .slide-card {
+      position:relative;
+      flex:0 0 calc(33.333% - 14px);
+      height:340px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 8px 25px rgba(0,0,0,0.3);
+      transition:transform .25s, box-shadow .25s;
+      background:#111827;
+    }
+    .slide-card img { width:100%; height:100%; object-fit:cover; display:block; }
+    .slide-card:hover { transform:translateY(-8px); box-shadow:0 12px 30px rgba(0,0,0,0.45); }
+
+    .slide-gradient {
+      position:absolute; bottom:0; left:0; right:0;
+      height:60%;
+      background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4) 45%, transparent);
+      pointer-events:none;
+    }
+    .slide-content { position:absolute; bottom:20px; left:20px; right:20px; z-index:2; color:#fff; }
+    .slide-content h2 { font-size:20px; margin-bottom:12px; line-height:1.2; font-weight:700; text-shadow:0 6px 20px rgba(0,0,0,0.6); }
+    .slide-content button {
+      background: linear-gradient(135deg,#2563eb,#3b82f6); color:#fff; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:600;
+      box-shadow:0 6px 18px rgba(37,99,235,0.18);
+    }
+    .slide-content button:hover { transform:translateY(-2px); }
+
+    /* Slider arrows (visible on desktop) */
+    .slider-nav { position:absolute; top:50%; left:0; right:0; display:flex; justify-content:space-between; transform:translateY(-50%); pointer-events:none; }
+    .slider-arrow {
+      pointer-events:auto;
+      margin:0 8px;
+      width:44px; height:44px; border-radius:50%;
+      border:none; background: rgba(255,255,255,0.06); color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer;
+      box-shadow:0 8px 24px rgba(0,0,0,0.6); transition:transform .18s, background .18s;
+    }
+    .slider-arrow:hover { transform:scale(1.06); background: rgba(255,255,255,0.12); }
+
+    /* indicators (mobile) */
+    .slider-indicators { display:flex; justify-content:center; gap:8px; margin-top:12px; }
+    .slider-indicator { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.16); cursor:pointer; transition:all .22s; }
+    .slider-indicator.active { background:#38bdf8; transform:scale(1.2); }
+
+    /* ====== Updated Games / Apps ====== */
+    .updated-games { width:90%; margin:30px auto; }
+    .games-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+    .games-header h2 { font-size:18px; font-weight:700; color:#e6eef8; display:flex; gap:8px; align-items:center; }
+    .view-all { background:#22c55e; border:none; color:#052e1a; padding:8px 14px; border-radius:20px; cursor:pointer; font-weight:700; display:flex; gap:8px; align-items:center; }
+
+    /* IMPORTANT: make games-grid show 3 columns on large screens */
+    .games-grid {
+      display:grid;
+      gap:18px;
+      /* default single column for very small screens */
+      grid-template-columns: 1fr;
+      margin-bottom: 30 px;
+    }
+
+    /* Game card */
+    .game-card {
+      background:#1e293b;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px;
+      position:relative;
+      border-left:5px solid rgba(34,197,94,0.12);
+      box-shadow:0 3px 10px rgba(0,0,0,0.25);
+      transition:transform .18s;
+      cursor:pointer;
+    }
+    .game-card:hover { transform:translateY(-6px); }
+    .game-image { width:72px; height:72px; border-radius:12px; overflow:hidden; flex:0 0 72px; }
+    .game-image img { width:100%; height:100%; object-fit:cover; display:block; }
+    .tag { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); background:#ef4444; color:#fff; font-size:11px; padding:4px 8px; border-radius:8px; }
+    .game-info h3 { font-size:15px; color:#38bdf8; margin-bottom:6px; }
+    .small-text { font-size:13px; color:#cbd5e1; }
+    .status.updated { position:absolute; top:8px; right:12px; background:#083d22; color:#a7f3d0; padding:6px 8px; border-radius:8px; font-size:12px; }
+
+    /* ====== Responsive breakpoints for games-grid columns ====== */
+    @media (min-width: 768px) {
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1025px) {
+      /* Desktop: 3 columns so you can see 6 items (3 x 2 rows) */
+      .games-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ====== Mobile slider tweaks ====== */
+    @media (max-width:1024px) {
+      .slide-card { flex:0 0 85%; height:300px; scroll-snap-align:start; }
+      .slider-wrapper { overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:15px; padding-bottom:8px; }
+      .slider-nav { display:none; } /* arrows hidden on mobile */
+      .menu { display:flex; } /* keep menu visible */
+      .games-grid { gap:14px; }
+    }
+
+    /* ====== Loading overlay ====== */
+    #loadingOverlay {
+      display:none;
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background: rgba(15,23,42,0.85);
+      z-index:9999; justify-content:center; align-items:center; flex-direction:column; color:#38bdf8; font-size:20px;
+    }
+    #loadingOverlay .spinner {
+      border:6px solid rgba(255,255,255,0.3); border-top:6px solid #38bdf8; border-radius:50%; width:50px; height:50px; margin-bottom:12px; animation:spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* small helpers */
+    .section-title { color:#e6eef8; font-weight:700; margin-bottom:8px; }
+  </style>
 </head>
-
 <body>
-  <!-- Navbar -->
+  <!-- Header -->
   <header class="navbar">
     <div class="logo"><span>X7ero</span></div>
-    <i class="fa-solid fa-bars menu-toggle"></i>
+
     <nav class="menu">
-      <a href="../index.html">Home</a>
-      <a href="../views/games.html">Games</a>
+      <a href="views/games.html">Games</a>
       <div class="dropdown">
-        <a href="javascript:void(0)">Roblox <i class="fa-solid fa-caret-down"></i></a>
+        <button class="dropbtn">Roblox <i class="fa-solid fa-angle-down"></i></button>
         <div class="dropdown-content">
-          <a href="garden.html">Garden</a>
-          <a href="robux.html">Robux</a>
-          <a href="diamonds.html">Diamonds</a>
+          <a href="views/garden.html">Garden</a>
+          <a href="views/robux.html">Robux</a>
         </div>
       </div>
-      <a href="../views/blog.html">Blog</a>
-      <!-- <a href="../views/login.html">Login</a> -->
+      <a href="views/blog.html">Blog</a>
     </nav>
+
     <div class="theme-toggle"><i class="fa-regular fa-sun"></i></div>
   </header>
 
-  <!-- Banner -->
-  <div class="banner">
-    <img src="../images/roblox.webp" alt="Roblox Banner">
-    <div class="banner-overlay">
-      <p>Roblox allows you to purchase upgrades for your avatar or buy special abilities in experiences.</p>
-    </div>
-  </div>
+  <!-- Slider -->
+  <section class="slider-section">
+    <div class="slider-container">
+      <div class="slider-wrapper" id="slider-wrapper"></div>
 
-  <!-- Username Form -->
-  <form id="usernameForm" class="form-container">
-    <h2 class="form-title">Roblox Username</h2>
-    <input type="text" id="usernameInput" placeholder="Enter username" class="form-input" required>
-    <button type="submit" class="submit-btn">Continue</button>
-  </form>
+      <!-- arrows visible on desktop -->
+      <div class="slider-nav">
+        <button class="slider-arrow" id="prev-slide" aria-label="prev"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="slider-arrow" id="next-slide" aria-label="next"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <div class="slider-indicators" id="slider-indicators"></div>
+  </section>
+
+  <!-- Games -->
+  <section class="updated-games">
+    <div class="games-header">
+      <h2><i class="fa-solid fa-gamepad"></i> Updated Games</h2>
+      <button class="view-all" onclick="location.href='views/games.html'">View All <i class="fa-solid fa-angle-right"></i></button>
+    </div>
+    <div class="games-grid" id="games-container"></div>
+  </section>
+
+  <!-- Apps -->
+  <section class="updated-games">
+    <div class="games-header">
+      <h2><i class="fa-solid fa-mobile-screen"></i> Updated Apps</h2>
+      <button class="view-all" onclick="location.href='views/apps.html'">View All <i class="fa-solid fa-angle-right"></i></button>
+    </div>
+    <div class="games-grid" id="apps-container"></div>
+  </section>
 
   <!-- Loading -->
-  <div id="loading" class="loading-container" style="display:none; text-align:center;">
-    <img src="../images/money_icon.png" alt="Loading" width="50">
-    <p id="loadingText">Loading packages...</p>
-  </div>
+  <div id="loadingOverlay"><div class="spinner"></div>Loading... Please wait</div>
 
-  <!-- Packages -->
-  <div id="packages" class="packages-container" style="display:none;">
-    <h2 class="packages-title">Select Roblox Package</h2>
-    <div id="packageList" class="packages-grid"></div>
-  </div>
+  <script>
+    // dropdown toggle for mobile (keeps your behavior)
+    const dropbtn = document.querySelector(".dropbtn");
+    dropbtn.addEventListener("click", () => document.querySelector(".dropdown").classList.toggle("active"));
 
-  <!-- CPA Locker -->
-  <div id="cpa-locker" style="display:none"></div>
+    const loadingOverlay = document.getElementById("loadingOverlay");
+    function showLoading(){ loadingOverlay.style.display='flex'; }
+    function hideLoading(){ loadingOverlay.style.display='none'; }
 
-  <!-- Scripts -->
-  <script src="../script/robux.js"></script>
+    // slider logic (kept, but enforce max 10 slides)
+    let currentSlide = 0;
+    let slideInterval = null;
+    let isDesktop = window.innerWidth > 1024;
+
+    function initSlider(slides){
+      const wrapper = document.getElementById('slider-wrapper');
+      const indicators = document.getElementById('slider-indicators');
+      wrapper.innerHTML = ''; indicators.innerHTML = '';
+
+      // LIMIT to 10 slides
+      const list = (Array.isArray(slides) ? slides : []).slice(0,10);
+
+      list.forEach((slide, i) => {
+        const el = document.createElement('div');
+        el.className = 'slide-card';
+        el.innerHTML = `
+          <img src="${slide.image}" alt="${(slide.title||'article').replace(/"/g,'') }">
+          <div class="slide-gradient"></div>
+          <div class="slide-content">
+            <h2>${slide.title || ''}</h2>
+            <button onclick="location.href='${slide.link || '#'}'">Read Article</button>
+          </div>
+        `;
+        wrapper.appendChild(el);
+
+        // mobile indicators
+        const ind = document.createElement('div');
+        ind.className = 'slider-indicator';
+        if(i===0) ind.classList.add('active');
+        ind.addEventListener('click', ()=> goToSlide(i));
+        indicators.appendChild(ind);
+      });
+
+      // attach arrows only if they exist (they do)
+      document.getElementById('prev-slide').onclick = prevSlide;
+      document.getElementById('next-slide').onclick = nextSlide;
+
+      // auto-slide on desktop
+      if(isDesktop) startAutoSlide();
+      // pause on hover for desktop
+      wrapper.onmouseenter = ()=> { if(isDesktop) pauseAutoSlide(); };
+      wrapper.onmouseleave = ()=> { if(isDesktop) startAutoSlide(); };
+
+      // initial layout
+      goToSlide(0);
+      updateIndicators();
+    }
+
+    function goToSlide(index){
+      const wrapper = document.getElementById('slider-wrapper');
+      const slides = document.querySelectorAll('.slide-card');
+      if(!slides.length) return;
+      const maxIndex = Math.max(0, slides.length - (isDesktop ? 3 : 1));
+      currentSlide = Math.max(0, Math.min(index, maxIndex));
+
+      if(isDesktop){
+        // compute pixel translate using first slide width + gap (works reliably)
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        const gap = parseInt(getComputedStyle(wrapper).gap) || 20;
+        const translate = (slideWidth + gap) * currentSlide;
+        wrapper.style.transform = `translateX(-${translate}px)`;
+      } else {
+        slides[currentSlide].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+      }
+      updateIndicators();
+    }
+
+    function nextSlide(){
+      const slides = document.querySelectorAll('.slide-card');
+      if(!slides.length) return;
+      if(isDesktop){
+        const maxIndex = Math.max(0, slides.length - 3);
+        currentSlide = (currentSlide >= maxIndex) ? 0 : currentSlide + 1;
+      } else {
+        currentSlide = (currentSlide + 1) % slides.length;
+      }
+      goToSlide(currentSlide);
+    }
+
+    function prevSlide(){
+      const slides = document.querySelectorAll('.slide-card');
+      if(!slides.length) return;
+      if(isDesktop){
+        const maxIndex = Math.max(0, slides.length - 3);
+        currentSlide = (currentSlide <= 0) ? maxIndex : currentSlide - 1;
+      } else {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      }
+      goToSlide(currentSlide);
+    }
+
+    function startAutoSlide(){
+      stopAutoSlide();
+      slideInterval = setInterval(nextSlide, 4500);
+    }
+    function pauseAutoSlide(){ stopAutoSlide(); }
+    function stopAutoSlide(){ if(slideInterval){ clearInterval(slideInterval); slideInterval=null; } }
+
+    function updateIndicators(){
+      const inds = document.querySelectorAll('.slider-indicator');
+      inds.forEach((ind,i)=> ind.classList.toggle('active', i===currentSlide));
+    }
+
+    // load content (slides + games/apps)
+    async function loadContent(){
+      try {
+        // slides
+        const slideRes = await fetch('data/slide.json').catch(()=>null);
+        let slides = [];
+        if(slideRes && slideRes.ok){ slides = await slideRes.json(); }
+        else {
+          // fallback to demo slides if file missing
+          slides = [
+            {title:'Demo 1', image:'https://picsum.photos/1200/800?random=1', link:'#'},
+            {title:'Demo 2', image:'https://picsum.photos/1200/800?random=2', link:'#'},
+            {title:'Demo 3', image:'https://picsum.photos/1200/800?random=3', link:'#'}
+          ];
+        }
+        initSlider(slides);
+
+        // games & apps
+        const gamesRes = await fetch('data/games.json').catch(()=>null);
+        let gamesData = [];
+        if(gamesRes && gamesRes.ok){ gamesData = await gamesRes.json(); }
+        else {
+          // fallback demo data (enough items to test layout)
+          gamesData = [
+            {title:'Game A', image:'https://picsum.photos/300?random=11', type:'game', size:'50MB', version:'1.0', date:'2025-01-01', mod:true},
+            {title:'Game B', image:'https://picsum.photos/300?random=12', type:'game', size:'120MB', version:'2.2', date:'2025-02-12'},
+            {title:'Game C', image:'https://picsum.photos/300?random=13', type:'game', size:'70MB', version:'1.4', date:'2025-03-15'},
+            {title:'Game D', image:'https://picsum.photos/300?random=14', type:'game', size:'80MB', version:'1.8', date:'2025-04-20'},
+            {title:'Game E', image:'https://picsum.photos/300?random=15', type:'game', size:'95MB', version:'2.0', date:'2025-05-05'},
+            {title:'Game F', image:'https://picsum.photos/300?random=16', type:'game', size:'110MB', version:'3.0', date:'2025-06-10'},
+            {title:'App X', image:'https://picsum.photos/300?random=21', type:'app', size:'25MB', version:'1.1', date:'2025-01-10'},
+            {title:'App Y', image:'https://picsum.photos/300?random=22', type:'app', size:'40MB', version:'1.2', date:'2025-02-11'},
+            {title:'App Z', image:'https://picsum.photos/300?random=23', type:'app', size:'60MB', version:'2.0', date:'2025-03-12'},
+            {title:'App U', image:'https://picsum.photos/300?random=24', type:'app', size:'30MB', version:'1.5', date:'2025-04-12'},
+            {title:'App V', image:'https://picsum.photos/300?random=25', type:'app', size:'45MB', version:'2.1', date:'2025-05-12'},
+            {title:'App W', image:'https://picsum.photos/300?random=26', type:'app', size:'80MB', version:'3.1', date:'2025-06-12'}
+          ];
+        }
+
+        // render games (max 6)
+        const gamesContainer = document.getElementById('games-container');
+        const appsContainer = document.getElementById('apps-container');
+        gamesContainer.innerHTML = ''; appsContainer.innerHTML = '';
+
+        const games = gamesData.filter(i=> i.type === 'game').slice(0,6);
+        games.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'game-card';
+          card.innerHTML = `
+            <div class="game-image"><img src="${item.image}" alt="${(item.title||'').replace(/"/g,'') }"></div>
+            <div class="game-info">
+              <h3>${item.title || ''}</h3>
+              <p class="small-text">Size: ${item.size || '—'}</p>
+              <p class="small-text">Version: ${item.version || '—'}</p>
+              <small>📅 ${item.date || ''}</small>
+            </div>
+            <span class="status updated">UPDATED</span>
+          `;
+          card.addEventListener('click', ()=>{
+            showLoading();
+            setTimeout(()=>{ hideLoading(); if(typeof _VX === 'function') _VX(); }, 1200);
+          });
+          gamesContainer.appendChild(card);
+        });
+
+        const apps = gamesData.filter(i=> i.type === 'app').slice(0,6);
+        apps.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'game-card';
+          card.innerHTML = `
+            <div class="game-image"><img src="${item.image}" alt="${(item.title||'').replace(/"/g,'') }"></div>
+            <div class="game-info">
+              <h3>${item.title || ''}</h3>
+              <p class="small-text">Size: ${item.size || '—'}</p>
+              <p class="small-text">Version: ${item.version || '—'}</p>
+              <small>📅 ${item.date || ''}</small>
+            </div>
+            <span class="status updated">UPDATED</span>
+          `;
+          card.addEventListener('click', ()=>{
+            showLoading();
+            setTimeout(()=>{ hideLoading(); if(typeof _VX === 'function') _VX(); }, 1200);
+          });
+          appsContainer.appendChild(card);
+        });
+
+      } catch(err){
+        console.error('loadContent error', err);
+      }
+    }
+
+    // handle resize → recompute desktop/mobile flag and adjust translate
+    window.addEventListener('resize', ()=>{
+      const oldDesktop = isDesktop;
+      isDesktop = window.innerWidth > 1024;
+      // when layout mode changes, reset slide translate to avoid weird offsets
+      if(oldDesktop !== isDesktop){
+        // reset transform and index to 0 so wrapper won't be out of view
+        document.getElementById('slider-wrapper').style.transform = 'translateX(0px)';
+        currentSlide = 0;
+        stopAutoSlide();
+        if(isDesktop) startAutoSlide();
+      }
+    });
+
+    // init
+    loadContent();
+  </script>
 </body>
 </html>

@@ -1,0 +1,29 @@
+{
+    "blogs": [
+      {
+        "id": 1,
+        "title": "Top 5 Roblox Games to Play in 2025",
+        "author": "X7ero Team",
+        "date": "2025-11-01",
+        "image": "https://imgs.search.brave.com/ArlSkstLuubIg503RiIaItwaxroOWeLjiUTLoACxbtM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9lZ2Ft/ZXJzd29ybGQuY29t/L2Nkbi1jZ2kvaW1h/Z2Uvd2lkdGg9Njkw/LHF1YWxpdHk9NzUs/Zm9ybWF0PXdlYnAv/dXBsb2Fkcy9jb250/ZW50LzEvMTcvMTcz/OTIwNDM1MzQ0N19y/ZXNpemVkLnBuZw",
+        "content": "Discover the best Roblox games to play this year! From adventure to strategy, here’s what’s trending right now."
+      },
+      {
+        "id": 2,
+        "title": "How to Get More Followers in Roblox",
+        "author": "X7ero Guides",
+        "date": "2025-10-20",
+        "image": "https://imgs.search.brave.com/IK7q6ws4tMVM2gd-odVGWaVbxkqZhh3m23mIJxdHrz0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9lZ2Ft/ZXJzd29ybGQuY29t/L2Nkbi1jZ2kvaW1h/Z2Uvd2lkdGg9Njkw/LHF1YWxpdHk9NzUs/Zm9ybWF0PXdlYnAv/dXBsb2Fkcy9jb250/ZW50LzEvMTcvMTcz/NzU2NDE3MjA3N19y/ZXNpemVkLnBuZw",
+        "content": "Boost your Roblox profile easily with these safe and effective tips. Learn how to build a loyal community without hacks!"
+      },
+      {
+        "id": 3,
+        "title": "Why Roblox Studio Is Perfect for Beginners",
+        "author": "X7ero Academy",
+        "date": "2025-09-28",
+        "image": "https://imgs.search.brave.com/NB3IvSFMkLcNLeDwqrIw1F4mGuRWR--_x9Kld54acWo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9kcm9w/aW5ibG9nLm5ldC8z/NDI1MzMxMC9maWxl/cy90aGUtYmVzdC1y/b2Jsb3gtZ2FtZXMt/MjAyNS1wMXNlaC5X/ZWJw",
+        "content": "Roblox Studio gives everyone the power to create games. Let’s see why it’s one of the best learning tools for new developers."
+      }
+    ]
+  }
+  

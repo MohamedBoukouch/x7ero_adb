@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #111;
+    color: #eee;
+  }
+  .logo span {
+    font-size: 22px;
+    font-weight: 600;
+    color: #38bdf8;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0d1b3b;
+    padding: 15px 30px;
+    color: #fff;
+  }
+  
+  .navbar .menu a {
+    color: #ccc;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .navbar .menu a:hover,
+  .navbar .menu a.active {
+    color: #2196f3;
+  }
+  
+  .blog-section {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .blog-title {
+    color: #64b5f6;
+    font-size: 2.4rem;
+    font-weight: 800;
+  }
+  
+  .blog-subtitle {
+    color: #ccc;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+  }
+  
+  .blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .blog-card {
+    background: #1c1c1c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    transition: transform 0.3s;
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .blog-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .blog-info {
+    padding: 15px;
+    text-align: left;
+  }
+  
+  .blog-info h2 {
+    color: #90caf9;
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  
+  .blog-meta {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  .blog-snippet {
+    color: #ddd;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+  }
+  
+  .read-more {
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+  
+  .read-more:hover {
+    background-color: #1976d2;
+  }
+  
